@@ -1,0 +1,19 @@
+-> implementar algoritmo de criptografia para senhas;
+
+-> quando criar um cliente novo no ambiente de parceiro deve criar por default uma configuração zerada para o cliente e criar automaticamente o link do qrcode;
+
+-> criar função de excluir fotos
+
+-> criar área de configuração do usuário (alterar senha, etc)
+
+-> criar campo para biografia
+
+-> manter apenas 5 ultimas fotos de perfil
+
+-> permitir cadastrar nome das fotos
+
+-> alterar excluir conta para intenção se sair
+
+-> cleinte não pode logar no parceiro e vice versa
+
+-> definir o que é status_cliente na tabela de clientes e exibir o nome na lista de clientes do parceiro
