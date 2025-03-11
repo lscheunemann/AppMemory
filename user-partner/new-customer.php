@@ -58,10 +58,16 @@ $resultado = mysqli_query($conn, $sql);
 
 	
 while ($linha = mysqli_fetch_array($resultado)) {			
-  $nome 	  = $linha["nome_usuario_parceiro"];
-  $parceiro = $linha["parceiro"];
-}
+    $nome 	  = $linha["nome_usuario_parceiro"];
+    $parceiro = $linha["parceiro"];
+  }
+  
 
+
+if( isset( $_SESSION['mensagem'] ) )
+    {
+        $mensagem = $_SESSION['mensagem'];
+    }
 
 ?>
 <body>
@@ -98,80 +104,68 @@ while ($linha = mysqli_fetch_array($resultado)) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Gerenciar clientes</h2>
+            <h2>Cadastrar cliente</h2>
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
- 
-
     <div class="section-header">
-          <h2>Cadastro de clientes</h2> 
+          <h2>Informações do cliente</h2> 
     </div>
-    <div class="d-flex justify-content-center">
-    <a href="new-customer.php">
-        <button class="btn btn-primary" type="button">Adicionar novo cliente</button>
-    </a>
-    </div>
-    <br>
-    <h5 align="center">Clientes cadastrados</h5>
-    <section class="container mt-4">
-                <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Plano</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-    <?php
-        $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro'";
-        $resultadoCli = mysqli_query($conn, $sqlCli);
-        
-        while ($linhaCli = mysqli_fetch_array($resultadoCli)){
-            $idCli      = $linhaCli["id_cliente"];
-            $nomeCli      = $linhaCli["nome_cliente"];
-            $statusCli    = $linhaCli["status_cliente"];
-
-            $sqlPlanoId = "SELECT plano FROM tb_conta_cliente WHERE cliente = '$idCli'";
-            $resultadoPlanoId = mysqli_query($conn, $sqlPlanoId);
-            $linhaPlanoId = mysqli_fetch_assoc($resultadoPlanoId);
-            $planoId = $linhaPlanoId['plano'];
-
-            $sqlPlano = "SELECT nome_plano FROM tb_planos WHERE id_plano = '$planoId'";
-            $resultadoPlano = mysqli_query($conn, $sqlPlano);
-            $linhaPlano = mysqli_fetch_assoc($resultadoPlano);
-            $plano = $linhaPlano['nome_plano'];
-
-
-            echo ("
-                
-                    
-                    <tr>
-                        <td>$nomeCli</td>
-                        <td>$plano</td>
-                        <td>$statusCli</td>
-                        <td>
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
-                        </td>
-                    </tr>
-                    
-              
-
-            ");
-         }
+  
+    <section id="pageManager" class="contact">
+      <div class="container">
 
         
-    ?>
-                </tbody>
-                </table>
-                </div>
-    </section>
 
+        <div class="row justify-content-center mt-4">
+
+          <div class="col-lg-9">
+          <form action="save-new-customer.php" method="post" role="form" class="php-email-form">
+          <div class="form-group mt-3">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="nome completo do cliente"  required>
+          </div>
+          <div class="form-group mt-3">
+            <label for="name">Plano</label>
+            <input type="text" class="form-control" name="plan" id="plan" placeholder="Selecione o plano" value="criar combobox" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label for="dateBirth">Número cartão</label>
+              <input type="text" name="numCard" class="form-control" id="numCard" placeholder="número do cartão de crédito" " required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <label for="dateDeath">Código cartão</label>
+              <input type="text" class="form-control" name="codeCard" id="codeCard" placeholder="código do cartão de crédito" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label for="cityBirth">Validade cartão</label>
+              <input type="text" name="validCard" class="form-control" id="validCard" placeholder="validade do cartão de crédito"  required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <label for="cityDeath">Nome no cartão</label>
+              <input type="text" class="form-control" name="nameCard" id="nameCard" placeholder="nome igual ao do cartão de crédito"  required>
+            </div>
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message">errado</div>
+            <div class="sent-message">feitoo</div>
+          </div>
+          <div class="text-center"><button type="submit">Salvar</button></div>
+        </form>
+
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+    
   </main><!-- End #main -->
 
   <footer id="footer" class="footer">
@@ -199,23 +193,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <!-- Modal excluir depoimento-->
-<div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteTestimonials"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja excluir este depoimento?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 </body>
 
