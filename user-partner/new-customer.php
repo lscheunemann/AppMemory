@@ -130,26 +130,6 @@ if( isset( $_SESSION['mensagem'] ) )
             <label for="name">Plano</label>
             <input type="text" class="form-control" name="plan" id="plan" placeholder="Selecione o plano" value="criar combobox" required>
           </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="dateBirth">Número cartão</label>
-              <input type="text" name="numCard" class="form-control" id="numCard" placeholder="número do cartão de crédito" " required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="dateDeath">Código cartão</label>
-              <input type="text" class="form-control" name="codeCard" id="codeCard" placeholder="código do cartão de crédito" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="cityBirth">Validade cartão</label>
-              <input type="text" name="validCard" class="form-control" id="validCard" placeholder="validade do cartão de crédito"  required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="cityDeath">Nome no cartão</label>
-              <input type="text" class="form-control" name="nameCard" id="nameCard" placeholder="nome igual ao do cartão de crédito"  required>
-            </div>
-          </div>
           <div class="my-3">
             <div class="loading">Loading</div>
             <div class="error-message">errado</div>

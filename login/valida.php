@@ -33,6 +33,11 @@ elseif ($totalCustomer == 0){
 		$_SESSION['senhaPartner'] = $senha;
 		header('Location: ../user-partner/home.php');
 	}
+	else {
+		unset ($_SESSION['login']);
+		unset ($_SESSION['senha']);
+		header('location: acessoinvalido.html');
+	}
 }
 else {
 
