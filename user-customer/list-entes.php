@@ -63,31 +63,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
   $parceiro 	= $linha["parceiro"];
 }
 
-if (isset($_POST['id'])) {
-  $id = $_POST['id'];
-  echo "ID recebido: " . $id;
-} else {
-  echo "Nenhum ID recebido via POST.";
-}
 
-
-// busca dados do ente
-$sql2 = "Select * from tb_entes where id_ente = '$id'";
-$resultado2 = mysqli_query($conn, $sql2);
-while ($linha2 = mysqli_fetch_array($resultado2)) {
-  $id_ente = $linha2["id_ente"];
-  $nomeente = $linha2["nome_ente"];
-  $dtnasc = $linha2["dt_nascimento_ente"];
-  $dtfal = $linha2["dt_falecimento_ente"];
-  $cidnasc = $linha2["cidade_nascimento_ente"];
-  $cidfal = $linha2["cidade_falecimento_ente"];
-  $nomepai = $linha2["nome_pai_ente"];
-  $nomemae = $linha2["nome_mae_ente"];
-  $conjuge = $linha2["casado_com"];
-  $localizacao = $linha2["localizacao_ente"];
-  $confissao = $linha2["confissao_ente"];
-  $epitafio = $linha2["epitafio"];
-}
 
 if( isset( $_SESSION['mensagem'] ) )
     {
@@ -129,131 +105,48 @@ if( isset( $_SESSION['mensagem'] ) )
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Gerenciar página</h2>
+            <h2>Gerenciar entes</h2>
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
-    <div class="section-header">
-          <h2>Informações do ente</h2> 
-    </div>
-  
-    <section id="pageManager" class="contact">
-      <div class="container">
-
-        
-
-        <div class="row justify-content-center mt-4">
-
-          <div class="col-lg-9">
-          <form action="save-page-manager.php" method="post" role="form" class="php-email-form">
-          <div class="form-group mt-3">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="nome completo do ente" value="<?php if (!empty($nomeente)) {echo $nomeente;} ?>" required>
-            <input type="hidden" name="id" value="<?php if (!empty($id_ente)) {echo $id_ente;} ?>">
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="dateBirth">Data de nascimento</label>
-              <input type="date" name="dateBirth" class="form-control" id="dateBirth" placeholder="data de nascimento do ente" value="<?php if (!empty($dtnasc)) {echo $dtnasc;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="dateDeath">Data de falecimento</label>
-              <input type="date" class="form-control" name="dateDeath" id="dateDeath" placeholder="data de falecimento do ente" value="<?php if (!empty($dtfal)) {echo $dtfal;} ?>" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="cityBirth">Cidade de nascimento</label>
-              <input type="text" name="cityBirth" class="form-control" id="cityBirth" placeholder="cidade de nascimento do ente" value="<?php if (!empty($cidnasc)) {echo $cidnasc;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="cityDeath">Cidade de falecimento</label>
-              <input type="text" class="form-control" name="cityDeath" id="cityDeath" placeholder="cidade de falecimento do ente" value="<?php if (!empty($cidfal)) {echo $cidfal;} ?>" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="nameMother">Nome da mãe</label>
-              <input type="text" name="nameMother" class="form-control" id="nameMother" placeholder="nome da mãe do ente" value="<?php if (!empty($nomemae)) {echo $nomemae;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="nameFather">Nome do pai</label>
-              <input type="text" class="form-control" name="nameFather" id="nameFather" placeholder="nome do pai do ente" value="<?php if (!empty($nomepai)) {echo $nomepai;} ?>" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="married">Casado com</label>
-              <input type="text" name="married" class="form-control" id="married" placeholder="conjuge do ente" value="<?php if (!empty($conjuge)) {echo $conjuge;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="religion">Confissão religiosa</label>
-              <input type="text" class="form-control" name="religion" id="religion" placeholder="confissão religiosa do ente" value="<?php if (!empty($confissao)) {echo $confissao;} ?>" required>
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <label for="location">Localização do túmulo</label>
-            <input type="text" class="form-control" name="location" id="location" placeholder="localização do túmulo" value="<?php if (!empty($localizacao)) {echo $localizacao;} ?>" required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="epitaph">Epitáfio</label>
-            <textarea class="form-control" name="epitaph" id="epitaph" maxlength="1000" rows="5" placeholder="digite o epitáfio" required><?php if (!empty($epitafio)) {echo $epitafio;} ?></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message">errado</div>
-            <div class="sent-message">feitoo</div>
-          </div>
-          <div class="text-center"><button type="submit">Salvar</button></div>
-        </form>
-
-          </div><!-- End Contact Form -->
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
+    
 
     <div class="section-header">
-          <h2>Depoimentos</h2> 
+          <h2>Entes</h2> 
     </div>
-    <div class="d-flex justify-content-center">
-    <a href="page-testimonials.php">
-        <button class="btn btn-primary" type="button">Aprovar depoimentos</button>
-    </a>
-    </div>
-    <br>
-    <h5 align="center">Depoimentos aprovados</h5>
+
     <section class="container mt-4">
                 <div class="table-responsive">
                 <table class="table table-bordered text-center">
                     <thead class="table-dark">
                     <tr>
-                        <th scope="col">Autor</th>
-                        <th scope="col">Depoimento</th>
+                        <th scope="col">Nome</th>
                         <th scope="col">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
 
     <?php
-        $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro' AND aprovado = 1";
+        // busca dados do ente
+        $sql2 = "Select * from tb_entes where cliente = '$cliente'";
         $resultado2 = mysqli_query($conn, $sql2);
         
         while ($linha2 = mysqli_fetch_array($resultado2)){
-            $autor      = $linha2["escreveu"];
-            $depoimento = $linha2["depoimento"];
-            $id_depoimento   = $linha2["id_depoimento"];
+          $cod_ente = $linha2["id_ente"];
+          $nomeente = $linha2["nome_ente"];
 
             
             echo ("
                 
                     
                     <tr>
-                        <td>$autor</td>
-                        <td>$depoimento</td>
+                        <td>$nomeente</td>
                         <td>
+                        <form action='page-manager.php' method='post' style='display: inline;'>
+                          <input type='hidden' name='id' value='$cod_ente'>
+                          <button type='submit' class='btn btn-primary btn-sm'>Editar</button>
+                        </form>
                         <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
                         </td>
                     </tr>

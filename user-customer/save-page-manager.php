@@ -26,6 +26,7 @@
 
 
 //obtém os dados do ente do formulário preenchido
+    $id = $_POST['id'];
     $nome = $_POST['name'];
     $dt_nascimento = $_POST['dateBirth'];
     $dt_falecimento = $_POST['dateDeath'];
@@ -52,7 +53,7 @@ if (isset ($ente)){
 }
 ///se existe altera os dados do ente
 if ($existe > 0){
-    mysqli_query($conn, "update tb_entes set nome_ente='$nome', dt_nascimento_ente='$dt_nascimento', dt_falecimento_ente='$dt_falecimento', cidade_nascimento_ente='$cidade_nascimento', cidade_falecimento_ente='$cidade_falecimento', nome_pai_ente='$nome_pai', nome_mae_ente='$nome_mae', casado_com='$casado_com', confissao_ente='$religiao', localizacao_ente='$local_tumulo', epitafio='$epitafio' where cliente='$cliente'");
+    mysqli_query($conn, "update tb_entes set nome_ente='$nome', dt_nascimento_ente='$dt_nascimento', dt_falecimento_ente='$dt_falecimento', cidade_nascimento_ente='$cidade_nascimento', cidade_falecimento_ente='$cidade_falecimento', nome_pai_ente='$nome_pai', nome_mae_ente='$nome_mae', casado_com='$casado_com', confissao_ente='$religiao', localizacao_ente='$local_tumulo', epitafio='$epitafio' where id_ente='$id'");
 }
 else{
     ///se não existe cria um novo ente
@@ -63,7 +64,7 @@ else{
     session_start();
 
     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: page-manager.php");
+    header("Location: list-entes.php");
     ?>
 </head>
 

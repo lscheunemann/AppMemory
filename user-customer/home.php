@@ -116,7 +116,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
           <div class="col-xl-3 col-md-6 d-flex">
             <div class="service-item position-relative">
               <i class="bi bi-activity"></i>
-              <h4><a href="page-manager.php" class="stretched-link">Gerenciar página</a></h4>
+              <h4><a href="list-entes.php" class="stretched-link">Gerenciar entes</a></h4>
               <p>Informações cadastrais, localização, etc.</p>
             </div>
           </div><!-- End Service Item -->
