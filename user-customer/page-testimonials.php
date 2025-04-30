@@ -65,7 +65,17 @@ while ($linha = mysqli_fetch_array($resultado)) {
   $cliente = $linha["cliente"];
   $parceiro = $linha["parceiro"];
 }
+
+if (isset($_POST['idEnte'])) {
+  $id = $_POST['idEnte'];
+  echo "ID recebido: " . $id;
+} else {
+  echo "Nenhum ID recebido via POST.";
+  $id = 0;
+}
 ?>
+
+
 
 <body>
 
@@ -123,7 +133,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
                     <tbody>
 
     <?php
-        $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro' AND aprovado = 0";
+        $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro' AND ente = '$id' AND aprovado = 0";
         $resultado2 = mysqli_query($conn, $sql2);
         
         while ($linha2 = mysqli_fetch_array($resultado2)){
@@ -143,7 +153,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
                         <td>$depoimento</td>
                         <td>$aprovadoText</td>
                         <td>
-                        <a href='approve-testimonials.php?id=$id_depoimento'><button class='btn btn-success btn-sm mb-2'>Aprovar</button></a>
+                        <a href='approve-testimonials.php?id=$id_depoimento'><button class='btn btn-success btn-sm'>Aprovar</button></a>
                         <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
                         </td>
                     </tr>

@@ -205,7 +205,11 @@ if( isset( $_SESSION['mensagem'] ) )
             <div class="error-message">errado</div>
             <div class="sent-message">feitoo</div>
           </div>
-          <div class="text-center"><button type="submit">Salvar</button></div>
+          <div class="text-center d-flex justify-content-center gap-2">
+            <a href="list-entes.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
+            <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+          </div>
+
         </form>
 
           </div><!-- End Contact Form -->
@@ -219,9 +223,11 @@ if( isset( $_SESSION['mensagem'] ) )
           <h2>Depoimentos</h2> 
     </div>
     <div class="d-flex justify-content-center">
-    <a href="page-testimonials.php">
-        <button class="btn btn-primary" type="button">Aprovar depoimentos</button>
-    </a>
+    <form action="page-testimonials.php" method="post" style="display: inline;">
+      <input type="hidden" name="idEnte" value="<?php echo $id_ente; ?>">
+      <button type="submit" class="btn btn-primary">Aprovar depoimentos</button>
+    </form>
+
     </div>
     <br>
     <h5 align="center">Depoimentos aprovados</h5>
@@ -238,7 +244,7 @@ if( isset( $_SESSION['mensagem'] ) )
                     <tbody>
 
     <?php
-        $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro' AND aprovado = 1";
+        $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro'AND ente = '$id_ente' AND aprovado = 1";
         $resultado2 = mysqli_query($conn, $sql2);
         
         while ($linha2 = mysqli_fetch_array($resultado2)){
