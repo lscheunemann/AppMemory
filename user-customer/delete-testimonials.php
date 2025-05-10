@@ -35,7 +35,7 @@
     session_start();
 
     $_SESSION['mensagem'] = 'Depoimento excluído com sucesso';
-    header("Location: page-manager.php");
+    header("Location: list-entes.php");
     ?>
 
 </head>

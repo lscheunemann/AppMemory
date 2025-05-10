@@ -24,12 +24,19 @@
         $parceiro = $linha["parceiro"];
     }
 
+    if (isset($_POST['id'])) {
+        $idEnte = $_POST['id'];
+        echo "ID recebido: " . $idEnte;
+    } else {
+        echo "Nenhum ID recebido via POST.";
+    }
+
     $repositorioBase = "../assets/img/gallery/users/";
 
     $subpastaUsuario = $logado;
 
     // Diretório onde o arquivo será salvo
-    $repositorio = $repositorioBase . $subpastaUsuario . "/";
+    $repositorio = $repositorioBase . $subpastaUsuario . "/" . $idEnte . "/";
 
     // Verifica se o diretório existe, cria se necessário
     if (!is_dir($repositorio)) {
@@ -67,7 +74,7 @@
     session_start();
 
     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: media.php");
+    header("Location: list-entes-media.php");
     ?>
 </head>
 

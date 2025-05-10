@@ -62,6 +62,13 @@ while ($linha = mysqli_fetch_array($resultado)) {
   $nome   = $linha["nome_usuario_cliente"];
 }
 
+if (isset($_POST['id'])) {
+  $idEnte = $_POST['id'];
+  echo "ID recebido: " . $id;
+} else {
+  echo "Nenhum ID recebido via POST.";
+}
+
 ?>
 
 <body>
@@ -144,6 +151,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
               <h4>Editar foto de perfil</h4>
               <form action="upload-profile-image.php" method="post" enctype="multipart/form-data">
                 <div class="d-flex align-items-center gap-2">
+                  <input type='hidden' name="idEnteProfile" value="<?php echo $idEnte ?>">
                   <label for="profilePhoto" id="fileLabel" class="btn btn-success mb-0">Escolher foto</label>
                   <input type="file" id="profilePhoto" name="profilePhoto" accept=".png, .jpg, .jpeg" class="custom-file-input" hidden />
                   <button type="submit" class="btn btn-primary">Salvar imagem</button>
@@ -184,7 +192,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
         </div>
 
         <?php
-        $repositorioUsuario = "../assets/img/gallery/profile/$logado/";
+        $repositorioUsuario = "../assets/img/gallery/profile/$logado/$idEnte/";
 
         // Busca todos os arquivos de imagem no diretório do usuário
         $filesProfile = glob($repositorioUsuario . '*.{png,jpg,jpeg}', GLOB_BRACE);
@@ -237,6 +245,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
 
               <form action="upload-gallery-image.php" method="post" enctype="multipart/form-data">
                 <div class="d-flex align-items-center gap-2">
+                  <input type='hidden' name="id" value="<?php echo $idEnte ?>">
                   <label for="galleryPhoto" id="fileLabelGallery" class="btn btn-success mb-0">Escolher foto</label>
                   <input type="file" id="galleryPhoto" name="galleryPhoto" accept=".png, .jpg, .jpeg" class="custom-file-input" hidden />
                   <button type="submit" class="btn btn-primary">Salvar imagem</button>
@@ -278,7 +287,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
         <div class="row gy-4 justify-content-center">
           <?php
           // Diretório da galeria
-          $diretorio = "../assets/img/gallery/users/$logado";
+          $diretorio = "../assets/img/gallery/users/$logado/$idEnte";
 
           // Padrão de arquivos permitidos (imagens)
           $arquivos = glob($diretorio . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
@@ -327,6 +336,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
           </div>
           <div class="modal-footer">
             <form action="delete-gallery-image.php" method="post">
+              <input type='hidden' name="idEnte" value="<?php echo $idEnte ?>">
               <input type="hidden" name="imageName" id="imageName">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-danger">Excluir</button>

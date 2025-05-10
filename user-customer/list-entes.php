@@ -145,7 +145,7 @@ if( isset( $_SESSION['mensagem'] ) )
                         <td>
                         <form action='page-manager.php' method='post' style='display: inline;'>
                           <input type='hidden' name='id' value='$cod_ente'>
-                          <button type='submit' class='btn btn-primary btn-sm'>Editar</button>
+                          <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
                         </form>
                         <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
                         </td>

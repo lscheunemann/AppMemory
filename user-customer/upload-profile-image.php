@@ -24,6 +24,13 @@
         $parceiro = $linha["parceiro"];
     }
 
+    if (isset($_POST['idEnteProfile'])) {
+        $idEnte = $_POST['idEnteProfile'];
+        echo "ID recebido: " . $idEnte;
+    } else {
+        echo "Nenhum ID recebido via POST.";
+    }
+
     // Diretório base onde as imagens serão salvas
     $repositorioBase = "../assets/img/gallery/profile/";
 
@@ -31,7 +38,7 @@
     $subpastaUsuario = $logado;
 
     // Diretório onde o arquivo será salvo
-    $repositorio = $repositorioBase . $subpastaUsuario . "/";
+    $repositorio = $repositorioBase . $subpastaUsuario . "/" . $idEnte . "/";
 
     // Verifica se o diretório existe, cria se necessário
     if (!is_dir($repositorio)) {
@@ -66,7 +73,7 @@
     // Redireciona para a página "media.php" com mensagem de sucesso
     session_start();
     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: media.php");
+    header("Location: list-entes-media.php");
     exit();
 
     ?>
