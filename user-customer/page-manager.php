@@ -36,16 +36,15 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<?php  
+<?php
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
-if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-	unset($_SESSION['login']);
-	unset($_SESSION['senha']);
-	header("Location: ../index.php");
-	}
+if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true)) {
+  unset($_SESSION['login']);
+  unset($_SESSION['senha']);
+  header("Location: ../index.php");
+}
 
 $logado = $_SESSION['login'];
 
@@ -56,11 +55,11 @@ $sql = "Select nome_usuario_cliente, cliente, parceiro from tb_usuarios_cliente 
 
 $resultado = mysqli_query($conn, $sql);
 
-	
-while ($linha = mysqli_fetch_array($resultado)) {			
-  $nome 	= $linha["nome_usuario_cliente"];
-  $cliente 	= $linha["cliente"];
-  $parceiro 	= $linha["parceiro"];
+
+while ($linha = mysqli_fetch_array($resultado)) {
+  $nome   = $linha["nome_usuario_cliente"];
+  $cliente   = $linha["cliente"];
+  $parceiro   = $linha["parceiro"];
 }
 
 if (isset($_POST['id'])) {
@@ -89,12 +88,12 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
   $epitafio = $linha2["epitafio"];
 }
 
-if( isset( $_SESSION['mensagem'] ) )
-    {
-        $mensagem = $_SESSION['mensagem'];
-    }
+if (isset($_SESSION['mensagem'])) {
+  $mensagem = $_SESSION['mensagem'];
+}
 
 ?>
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -115,7 +114,7 @@ if( isset( $_SESSION['mensagem'] ) )
         </ul>
       </nav><!-- .navbar -->
 
-     
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -135,82 +134,106 @@ if( isset( $_SESSION['mensagem'] ) )
       </div>
     </div><!-- End Page Header -->
     <div class="section-header">
-          <h2>Informações do ente</h2> 
+      <h2>Informações do ente</h2>
     </div>
-  
+
     <section id="pageManager" class="contact">
       <div class="container">
 
-        
+
 
         <div class="row justify-content-center mt-4">
 
           <div class="col-lg-9">
-          <form action="save-page-manager.php" method="post" role="form" class="php-email-form">
-          <div class="form-group mt-3">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="nome completo do ente" value="<?php if (!empty($nomeente)) {echo $nomeente;} ?>" required>
-            <input type="hidden" name="id" value="<?php if (!empty($id_ente)) {echo $id_ente;} ?>">
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="dateBirth">Data de nascimento</label>
-              <input type="date" name="dateBirth" class="form-control" id="dateBirth" placeholder="data de nascimento do ente" value="<?php if (!empty($dtnasc)) {echo $dtnasc;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="dateDeath">Data de falecimento</label>
-              <input type="date" class="form-control" name="dateDeath" id="dateDeath" placeholder="data de falecimento do ente" value="<?php if (!empty($dtfal)) {echo $dtfal;} ?>" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="cityBirth">Cidade de nascimento</label>
-              <input type="text" name="cityBirth" class="form-control" id="cityBirth" placeholder="cidade de nascimento do ente" value="<?php if (!empty($cidnasc)) {echo $cidnasc;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="cityDeath">Cidade de falecimento</label>
-              <input type="text" class="form-control" name="cityDeath" id="cityDeath" placeholder="cidade de falecimento do ente" value="<?php if (!empty($cidfal)) {echo $cidfal;} ?>" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="nameMother">Nome da mãe</label>
-              <input type="text" name="nameMother" class="form-control" id="nameMother" placeholder="nome da mãe do ente" value="<?php if (!empty($nomemae)) {echo $nomemae;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="nameFather">Nome do pai</label>
-              <input type="text" class="form-control" name="nameFather" id="nameFather" placeholder="nome do pai do ente" value="<?php if (!empty($nomepai)) {echo $nomepai;} ?>" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label for="married">Casado com</label>
-              <input type="text" name="married" class="form-control" id="married" placeholder="conjuge do ente" value="<?php if (!empty($conjuge)) {echo $conjuge;} ?>" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <label for="religion">Confissão religiosa</label>
-              <input type="text" class="form-control" name="religion" id="religion" placeholder="confissão religiosa do ente" value="<?php if (!empty($confissao)) {echo $confissao;} ?>" required>
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <label for="location">Localização do túmulo</label>
-            <input type="text" class="form-control" name="location" id="location" placeholder="localização do túmulo" value="<?php if (!empty($localizacao)) {echo $localizacao;} ?>" required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="epitaph">Epitáfio</label>
-            <textarea class="form-control" name="epitaph" id="epitaph" maxlength="1000" rows="5" placeholder="digite o epitáfio" required><?php if (!empty($epitafio)) {echo $epitafio;} ?></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message">errado</div>
-            <div class="sent-message">feitoo</div>
-          </div>
-          <div class="text-center d-flex justify-content-center gap-2">
-            <a href="list-entes.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
-            <button type="submit" class="btn btn-success btn-sm">Salvar</button>
-          </div>
+            <form action="save-page-manager.php" method="post" role="form" class="php-email-form">
+              <div class="form-group mt-3">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="nome completo do ente" value="<?php if (!empty($nomeente)) {
+                                                                                                                            echo $nomeente;
+                                                                                                                          } ?>" required>
+                <input type="hidden" name="id" value="<?php if (!empty($id_ente)) {
+                                                        echo $id_ente;
+                                                      } ?>">
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="dateBirth">Data de nascimento</label>
+                  <input type="date" name="dateBirth" class="form-control" id="dateBirth" placeholder="data de nascimento do ente" value="<?php if (!empty($dtnasc)) {
+                                                                                                                                            echo $dtnasc;
+                                                                                                                                          } ?>" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="dateDeath">Data de falecimento</label>
+                  <input type="date" class="form-control" name="dateDeath" id="dateDeath" placeholder="data de falecimento do ente" value="<?php if (!empty($dtfal)) {
+                                                                                                                                              echo $dtfal;
+                                                                                                                                            } ?>" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="cityBirth">Cidade de nascimento</label>
+                  <input type="text" name="cityBirth" class="form-control" id="cityBirth" placeholder="cidade de nascimento do ente" value="<?php if (!empty($cidnasc)) {
+                                                                                                                                              echo $cidnasc;
+                                                                                                                                            } ?>" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="cityDeath">Cidade de falecimento</label>
+                  <input type="text" class="form-control" name="cityDeath" id="cityDeath" placeholder="cidade de falecimento do ente" value="<?php if (!empty($cidfal)) {
+                                                                                                                                                echo $cidfal;
+                                                                                                                                              } ?>" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="nameMother">Nome da mãe</label>
+                  <input type="text" name="nameMother" class="form-control" id="nameMother" placeholder="nome da mãe do ente" value="<?php if (!empty($nomemae)) {
+                                                                                                                                        echo $nomemae;
+                                                                                                                                      } ?>" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="nameFather">Nome do pai</label>
+                  <input type="text" class="form-control" name="nameFather" id="nameFather" placeholder="nome do pai do ente" value="<?php if (!empty($nomepai)) {
+                                                                                                                                        echo $nomepai;
+                                                                                                                                      } ?>" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="married">Casado com</label>
+                  <input type="text" name="married" class="form-control" id="married" placeholder="conjuge do ente" value="<?php if (!empty($conjuge)) {
+                                                                                                                              echo $conjuge;
+                                                                                                                            } ?>" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="religion">Confissão religiosa</label>
+                  <input type="text" class="form-control" name="religion" id="religion" placeholder="confissão religiosa do ente" value="<?php if (!empty($confissao)) {
+                                                                                                                                            echo $confissao;
+                                                                                                                                          } ?>" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="location">Localização do túmulo</label>
+                <input type="text" class="form-control" name="location" id="location" placeholder="localização do túmulo" value="<?php if (!empty($localizacao)) {
+                                                                                                                                    echo $localizacao;
+                                                                                                                                  } ?>" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="epitaph">Epitáfio</label>
+                <textarea class="form-control" name="epitaph" id="epitaph" maxlength="1000" rows="5" placeholder="digite o epitáfio" required><?php if (!empty($epitafio)) {
+                                                                                                                                                echo $epitafio;
+                                                                                                                                              } ?></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message">errado</div>
+                <div class="sent-message">feitoo</div>
+              </div>
+              <div class="text-center d-flex justify-content-center gap-2">
+                <a href="list-entes.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
+                <button type="submit" class="btn btn-success btn-sm">Salvar</button>
+              </div>
 
-        </form>
+            </form>
 
           </div><!-- End Contact Form -->
 
@@ -218,42 +241,44 @@ if( isset( $_SESSION['mensagem'] ) )
 
       </div>
     </section><!-- End Contact Section -->
-
+ 
     <div class="section-header">
-          <h2>Depoimentos</h2> 
+      <h2>Depoimentos</h2>
     </div>
     <div class="d-flex justify-content-center">
-    <form action="page-testimonials.php" method="post" style="display: inline;">
-      <input type="hidden" name="idEnte" value="<?php echo $id_ente; ?>">
-      <button type="submit" class="btn btn-primary">Aprovar depoimentos</button>
-    </form>
+      <form action="page-testimonials.php" method="post" style="display: inline;">
+        <input type="hidden" name="idEnte" value="<?php echo $id_ente; ?>">
+        <button type="submit" class="btn btn-primary">Aprovar depoimentos</button>
+      </form>
 
     </div>
     <br>
     <h5 align="center">Depoimentos aprovados</h5>
     <section class="container mt-4">
-                <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Autor</th>
-                        <th scope="col">Depoimento</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Autor</th>
+              <th scope="col">Depoimento</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
 
-    <?php
-        $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro'AND ente = '$id_ente' AND aprovado = 1";
-        $resultado2 = mysqli_query($conn, $sql2);
-        
-        while ($linha2 = mysqli_fetch_array($resultado2)){
-            $autor      = $linha2["escreveu"];
-            $depoimento = $linha2["depoimento"];
-            $id_depoimento   = $linha2["id_depoimento"];
+            <?php
+            if (isset($id_ente)) {
+              $sql2 = "SELECT * FROM tb_depoimentos_ente WHERE cliente = '$cliente' AND parceiro = '$parceiro'AND ente = '$id_ente' AND aprovado = 1";
+              $resultado2 = mysqli_query($conn, $sql2);
 
-            
-            echo ("
+              if (mysqli_num_rows($resultado2) > 0) {
+              while ($linha2 = mysqli_fetch_array($resultado2)) {
+                $autor      = $linha2["escreveu"];
+                $depoimento = $linha2["depoimento"];
+                $id_depoimento   = $linha2["id_depoimento"];
+
+
+                echo ("
                 
                     
                     <tr>
@@ -267,13 +292,19 @@ if( isset( $_SESSION['mensagem'] ) )
               
 
             ");
-        }
-
-        
-    ?>
-                </tbody>
-                </table>
-                </div>
+              }
+            }else {
+              echo "
+                <tr>
+                    <td colspan='3' class='text-center'>Nenhum depoimento aprovado.</td>
+                </tr>
+              ";
+            }
+            } 
+            ?>
+          </tbody>
+        </table>
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -283,7 +314,7 @@ if( isset( $_SESSION['mensagem'] ) )
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 
@@ -303,23 +334,27 @@ if( isset( $_SESSION['mensagem'] ) )
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <!-- Modal excluir depoimento-->
-<div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteTestimonials"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja excluir este depoimento?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
+  <div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteTestimonials">
+            <font color="black">Atenção!</font>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <h6>
+            <font color="black">Tem certeza que deseja excluir este depoimento?</font>
+          </h6>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </body>
 

@@ -40,19 +40,8 @@
     $epitafio = $_POST['epitaph'];
 
 
-//verifica se já existe ente cadastrado para o cliente em questão
-$sqlverifica = "select id_ente from tb_entes where cliente = '$cliente'";
-$resultadoverifica = mysqli_query($conn, $sqlverifica);
-while ($linhaverifica = mysqli_fetch_array($resultadoverifica)) {
-
-    $ente = $linhaverifica["id_ente"];
-}
-$existe = 0;
-if (isset ($ente)){
-    $existe = 1;
-}
-///se existe altera os dados do ente
-if ($existe > 0){
+//verifica se é um cadastro de um ente novo ou atualização de um existente
+if (isset($id) && $id > 0){
     mysqli_query($conn, "update tb_entes set nome_ente='$nome', dt_nascimento_ente='$dt_nascimento', dt_falecimento_ente='$dt_falecimento', cidade_nascimento_ente='$cidade_nascimento', cidade_falecimento_ente='$cidade_falecimento', nome_pai_ente='$nome_pai', nome_mae_ente='$nome_mae', casado_com='$casado_com', confissao_ente='$religiao', localizacao_ente='$local_tumulo', epitafio='$epitafio' where id_ente='$id'");
 }
 else{

@@ -36,16 +36,15 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<?php  
+<?php
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
-if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-	unset($_SESSION['login']);
-	unset($_SESSION['senha']);
-	header("Location: ../index.php");
-	}
+if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true)) {
+  unset($_SESSION['login']);
+  unset($_SESSION['senha']);
+  header("Location: ../index.php");
+}
 
 $logado = $_SESSION['login'];
 
@@ -56,21 +55,21 @@ $sql = "Select nome_usuario_cliente, cliente, parceiro from tb_usuarios_cliente 
 
 $resultado = mysqli_query($conn, $sql);
 
-	
-while ($linha = mysqli_fetch_array($resultado)) {			
-  $nome 	= $linha["nome_usuario_cliente"];
-  $cliente 	= $linha["cliente"];
-  $parceiro 	= $linha["parceiro"];
+
+while ($linha = mysqli_fetch_array($resultado)) {
+  $nome   = $linha["nome_usuario_cliente"];
+  $cliente   = $linha["cliente"];
+  $parceiro   = $linha["parceiro"];
 }
 
 
 
-if( isset( $_SESSION['mensagem'] ) )
-    {
-        $mensagem = $_SESSION['mensagem'];
-    }
+if (isset($_SESSION['mensagem'])) {
+  $mensagem = $_SESSION['mensagem'];
+}
 
 ?>
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -91,7 +90,7 @@ if( isset( $_SESSION['mensagem'] ) )
         </ul>
       </nav><!-- .navbar -->
 
-     
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -110,34 +109,35 @@ if( isset( $_SESSION['mensagem'] ) )
         </div>
       </div>
     </div><!-- End Page Header -->
-    
+
 
     <div class="section-header">
-          <h2>Entes</h2> 
+      <h2>Entes</h2>
     </div>
 
     <section class="container mt-4">
-                <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
 
-    <?php
-        // busca dados do ente
-        $sql2 = "Select * from tb_entes where cliente = '$cliente'";
-        $resultado2 = mysqli_query($conn, $sql2);
-        
-        while ($linha2 = mysqli_fetch_array($resultado2)){
-          $cod_ente = $linha2["id_ente"];
-          $nomeente = $linha2["nome_ente"];
+            <?php
+            // busca dados do ente
+            $sql2 = "Select * from tb_entes where cliente = '$cliente'";
+            $resultado2 = mysqli_query($conn, $sql2);
 
-            
-            echo ("
+            if (mysqli_num_rows($resultado2) > 0) {
+              while ($linha2 = mysqli_fetch_array($resultado2)) {
+                $cod_ente = $linha2["id_ente"];
+                $nomeente = $linha2["nome_ente"];
+
+
+                echo ("
                 
                     
                     <tr>
@@ -154,13 +154,23 @@ if( isset( $_SESSION['mensagem'] ) )
               
 
             ");
-        }
+              }
+            } else {
+              echo "
+                <tr>
+                    <td colspan='2' class='text-center'>Nenhum ente cadastrado.</td>
+                </tr>
+              ";
+            }
 
-        
-    ?>
-                </tbody>
-                </table>
-                </div>
+            ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center mt-3">
+        <a href="page-manager.php" class="btn btn-primary">Adicionar Ente</a>
+      </div>
+
     </section>
 
   </main><!-- End #main -->
@@ -170,7 +180,7 @@ if( isset( $_SESSION['mensagem'] ) )
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 
@@ -190,23 +200,27 @@ if( isset( $_SESSION['mensagem'] ) )
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <!-- Modal excluir depoimento-->
-<div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteTestimonials"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja excluir este depoimento?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
+  <div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteTestimonials">
+            <font color="black">Atenção!</font>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <h6>
+            <font color="black">Tem certeza que deseja excluir este depoimento?</font>
+          </h6>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </body>
 

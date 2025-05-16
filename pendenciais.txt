@@ -17,3 +17,7 @@
 -> cleinte não pode logar no parceiro e vice versa
 
 -> definir o que é status_cliente na tabela de clientes e exibir o nome na lista de clientes do parceiro
+
+-> não oferecer a sessão de depoimentos na page-manager quando estiver cadastrando um novo ente
+
+-> verificar erro ao salvar epitáfio do ente (problema com o caractere ')
