@@ -3,6 +3,13 @@
 
 <head>
     <?php
+    if (isset($_POST['id'])) {
+    $idEnte = $_POST['id'];
+    echo "ID recebido: " . $id;
+    } else {
+    echo "Nenhum ID recebido via POST.";
+    }
+
     require("../inc/connect.inc");
     session_start();
     if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true)) {
@@ -47,7 +54,7 @@
     
 
 
-    mysqli_query($conn, "update tb_configuracoes set permite_curtir='$curtidas', permite_depoimentos='$depoimentos' where cliente='$cliente'");
+    mysqli_query($conn, "update tb_configuracoes set permite_curtir='$curtidas', permite_depoimentos='$depoimentos' where cliente='$cliente' AND ente='$idEnte'");
 
 
 
@@ -55,7 +62,7 @@
     session_start();
 
     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: config-manager.php");
+    header("Location: list-entes-config.php");
     ?>
 </head>
 

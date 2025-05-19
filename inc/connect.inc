@@ -232,6 +232,7 @@ function createtables($conn){
             id_configuracao INT(6) AUTO_INCREMENT PRIMARY KEY, 
             cliente INT(6) NOT NULL,
             parceiro INT(6) NOT NULL,
+            ente INT(6) NOT NULL,
             qrcode_ente VARCHAR(300) NOT NULL,
             permite_curtir INT(1) NOT NULL,
             permite_depoimentos INT(1) NOT NULL,

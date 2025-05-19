@@ -40,6 +40,13 @@
   ======================================================== -->
 </head>
 <?php  
+if (isset($_POST['id'])) {
+  $idEnte = $_POST['id'];
+  echo "ID recebido: " . $id;
+} else {
+  echo "Nenhum ID recebido via POST.";
+}
+
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
@@ -66,7 +73,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
   $parceiro = $linha["parceiro"];
 }
 
-$sql2 = "Select permite_curtir, permite_depoimentos, qrcode_ente, ativo from tb_configuracoes where cliente = '$cliente'";
+$sql2 = "Select permite_curtir, permite_depoimentos, qrcode_ente, ativo from tb_configuracoes where cliente = '$cliente' AND ente = '$idEnte'";
 $resultado2 = mysqli_query($conn, $sql2);
 
 while ($linha2 = mysqli_fetch_array($resultado2)) {
@@ -150,6 +157,7 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
              <div class="sent-message">feitoo</div>
           </div>
               <div class="text-center mt-3">
+                <input type="hidden" name="id" value="<?php if (!empty($idEnte)){echo $idEnte;}?>">
                 <button class="btn btn-success" type="submit">Salvar</button>
               </div>
             </form>

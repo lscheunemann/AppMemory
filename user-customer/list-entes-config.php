@@ -36,30 +36,36 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
-<?php  
+<?php
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
-if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-	unset($_SESSION['login']);
-	unset($_SESSION['senha']);
-	header("Location: ../index.php");
-	}
+if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true)) {
+  unset($_SESSION['login']);
+  unset($_SESSION['senha']);
+  header("Location: ../index.php");
+}
 
 $logado = $_SESSION['login'];
 
 
 $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 
-$sql = "Select nome_usuario_cliente from tb_usuarios_cliente where email_usuario_cliente = '$logado'";
-// setando as linhas de exibição na tela;
+$sql = "Select nome_usuario_cliente, cliente, parceiro from tb_usuarios_cliente where email_usuario_cliente = '$logado'";
+
 $resultado = mysqli_query($conn, $sql);
 
-	
-while ($linha = mysqli_fetch_array($resultado)) {			
-  $nome 	= $linha["nome_usuario_cliente"];
+
+while ($linha = mysqli_fetch_array($resultado)) {
+  $nome   = $linha["nome_usuario_cliente"];
+  $cliente   = $linha["cliente"];
+  $parceiro   = $linha["parceiro"];
+}
+
+
+
+if (isset($_SESSION['mensagem'])) {
+  $mensagem = $_SESSION['mensagem'];
 }
 
 ?>
@@ -84,6 +90,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
         </ul>
       </nav><!-- .navbar -->
 
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -97,71 +104,78 @@ while ($linha = mysqli_fetch_array($resultado)) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Dashboard</h2>
-           <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
-
-            <a class="cta-btn" href="contact.html">Available for hire</a>
-           -->
+            <h2>Gerenciar configurações</h2>
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <div class="container">
 
-        <div class="row gy-4">
+    <div class="section-header">
+      <h2>Escolha o ente</h2>
+    </div>
 
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-activity"></i>
-              <h4><a href="list-entes.php" class="stretched-link">Gerenciar entes</a></h4>
-              <p>Informações cadastrais, localização, gestão de depoimentos, etc.</p>
-            </div>
-          </div><!-- End Service Item -->
-          
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-broadcast"></i>
-              <h4><a href="list-entes-media.php" class="stretched-link">Mídias</a></h4>
-              <p>Adicione uma foto de perfil e demais fotos e vídeos</p>
-            </div>
-          </div><!-- End Service Item -->
+    <section class="container mt-4">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
 
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-bounding-box-circles"></i>
-              <h4><a href="list-entes-config.php" class="stretched-link">Gerenciar configurações</a></h4>
-              <p>Acessos, permissões e aprovação de depoimentos</p>
-            </div>
-          </div><!-- End Service Item -->
+            <?php
+            // busca dados do ente
+            $sql2 = "Select * from tb_entes where cliente = '$cliente'";
+            $resultado2 = mysqli_query($conn, $sql2);
 
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-calendar4-week"></i>
-              <h4><a href="account-manager.php" class="stretched-link">Gerenciar conta</a></h4>
-              <p>Plano, pagamentos, excluir conta</p>
-            </div>
-          </div><!-- End Service Item -->
+            if (mysqli_num_rows($resultado2) > 0) {
+              while ($linha2 = mysqli_fetch_array($resultado2)) {
+                $cod_ente = $linha2["id_ente"];
+                $nomeente = $linha2["nome_ente"];
 
-          
 
-        </div>
+                echo ("
+                
+                    
+                    <tr>
+                        <td>$nomeente</td>
+                        <td>
+                        <form action='config-manager.php' method='post' style='display: inline;'>
+                          <input type='hidden' name='id' value='$cod_ente'>
+                          <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
+                        </form>
+                        </td>
+                    </tr>
+                    
+              
 
+            ");
+              }
+            } else {
+              echo "
+                <tr>
+                    <td colspan='2' class='text-center'>Nenhum ente cadastrado.</td>
+                </tr>
+              ";
+            }
+
+            ?>
+          </tbody>
+        </table>
       </div>
-    </section><!-- End Services Section -->
-
+    </section>
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 
@@ -176,10 +190,12 @@ while ($linha = mysqli_fetch_array($resultado)) {
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <!-- <script src="../assets/vendor/php-email-form/validate.js"></script>-->
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <!-- Modal excluir depoimento-->
+
 
 </body>
 
