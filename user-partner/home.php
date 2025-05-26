@@ -125,7 +125,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
             <div class="service-item position-relative">
               <i class="bi bi-vimeo"></i>
               <h4><a href="customer-manager.php" class="stretched-link">Gerenciar clientes</a></h4>
-              <p>Crie, edite ou elimine clientes</p>
+              <p>Crie, edite ou elimine seus clientes</p>
             </div>
           </div><!-- End Service Item -->
 
