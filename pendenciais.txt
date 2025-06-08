@@ -21,3 +21,5 @@
 -> não oferecer a sessão de depoimentos na page-manager quando estiver cadastrando um novo ente
 
 -> verificar erro ao salvar epitáfio do ente (problema com o caractere ')
+
+-> precisa vincular quantidade de entes a plano contratado no cadastro do cliente no módulo de parceiro

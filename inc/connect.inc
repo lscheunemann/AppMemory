@@ -166,7 +166,13 @@ function createtables($conn){
         CREATE TABLE tb_clientes (
             id_cliente INT(6) AUTO_INCREMENT PRIMARY KEY, 
             parceiro INT(6) NOT NULL,
-            nome_cliente VARCHAR(100) NOT NULL UNIQUE,
+            nome_cliente VARCHAR(100) NOT NULL,
+            endereco_cliente VARCHAR(100) NOT NULL,
+            cpf_cliente INT(11) NOT NULL UNIQUE,
+            telefone_cliente VARCHAR(100) NOT NULL,
+            email_cliente VARCHAR(100) NOT NULL,
+            plano_cliente INT(6) NOT NULL,
+            nome_vendedor VARCHAR(100) NOT NULL,
             status_cliente VARCHAR(10) NOT NULL
             );
     ";
@@ -250,7 +256,6 @@ function createtables($conn){
             cliente INT(6) NOT NULL,
             parceiro INT(6) NOT NULL,
             ente INT(6) NOT NULL,
-            plano INT(6) NOT NULL,
             numero_cartao INT(100) NOT NULL,
             codigo_cartao INT(50) NOT NULL,
             validade_cartao VARCHAR(10) NOT NULL

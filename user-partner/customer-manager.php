@@ -134,13 +134,9 @@ while ($linha = mysqli_fetch_array($resultado)) {
         
         while ($linhaCli = mysqli_fetch_array($resultadoCli)){
             $idCli      = $linhaCli["id_cliente"];
-            $nomeCli      = $linhaCli["nome_cliente"];
-            $statusCli    = $linhaCli["status_cliente"];
-
-            $sqlPlanoId = "SELECT plano FROM tb_conta_cliente WHERE cliente = '$idCli'";
-            $resultadoPlanoId = mysqli_query($conn, $sqlPlanoId);
-            $linhaPlanoId = mysqli_fetch_assoc($resultadoPlanoId);
-            $planoId = $linhaPlanoId['plano'];
+            $nomeCli    = $linhaCli["nome_cliente"];
+            $planoId   = $linhaCli["plano_cliente"];
+            $statusCli  = $linhaCli["status_cliente"];
 
             $sqlPlano = "SELECT nome_plano FROM tb_planos WHERE id_plano = '$planoId'";
             $resultadoPlano = mysqli_query($conn, $sqlPlano);
@@ -156,7 +152,8 @@ while ($linha = mysqli_fetch_array($resultado)) {
                         <td>$plano</td>
                         <td>$statusCli</td>
                         <td>
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
+                        <button class='btn btn-primary btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#XXX.php'>Ver</button>
+                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer'>Excluir</button>
                         </td>
                     </tr>
                     
@@ -199,11 +196,11 @@ while ($linha = mysqli_fetch_array($resultado)) {
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <!-- Modal excluir depoimento-->
-<div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
+<div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="deleteCustomer" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteTestimonials"><font color="black">Atenção!</font></h5>
+        <h5 class="modal-title" id="deleteCustomer"><font color="black">Atenção!</font></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
