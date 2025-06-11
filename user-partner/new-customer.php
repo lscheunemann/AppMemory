@@ -36,16 +36,15 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<?php  
+<?php
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
-if((!isset ($_SESSION['loginPartner']) == true) and (!isset ($_SESSION['senhaPartner']) == true))
-{
-	unset($_SESSION['loginPartner']);
-	unset($_SESSION['senhaPartner']);
-	header("Location: ../index.php");
-	}
+if ((!isset($_SESSION['loginPartner']) == true) and (!isset($_SESSION['senhaPartner']) == true)) {
+  unset($_SESSION['loginPartner']);
+  unset($_SESSION['senhaPartner']);
+  header("Location: ../index.php");
+}
 
 $logado = $_SESSION['loginPartner'];
 
@@ -56,20 +55,29 @@ $sql = "Select nome_usuario_parceiro, parceiro from tb_usuarios_parceiro where e
 // setando as linhas de exibição na tela;
 $resultado = mysqli_query($conn, $sql);
 
-	
-while ($linha = mysqli_fetch_array($resultado)) {			
-    $nome 	  = $linha["nome_usuario_parceiro"];
-    $parceiro = $linha["parceiro"];
-  }
-  
+
+while ($linha = mysqli_fetch_array($resultado)) {
+  $nome     = $linha["nome_usuario_parceiro"];
+  $parceiro = $linha["parceiro"];
+}
 
 
-if( isset( $_SESSION['mensagem'] ) )
-    {
-        $mensagem = $_SESSION['mensagem'];
-    }
+
+if (isset($_SESSION['mensagem'])) {
+  $mensagem = $_SESSION['mensagem'];
+}
 
 ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#cpf').mask('000.000.000-00');
+  });
+</script>
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -90,7 +98,7 @@ if( isset( $_SESSION['mensagem'] ) )
         </ul>
       </nav><!-- .navbar -->
 
-     
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -110,33 +118,66 @@ if( isset( $_SESSION['mensagem'] ) )
       </div>
     </div><!-- End Page Header -->
     <div class="section-header">
-          <h2>Informações do cliente</h2> 
+      <h2>Informações do cliente</h2>
     </div>
-  
+
     <section id="pageManager" class="contact">
       <div class="container">
 
-        
 
         <div class="row justify-content-center mt-4">
 
           <div class="col-lg-9">
-          <form action="save-new-customer.php" method="post" role="form" class="php-email-form">
-          <div class="form-group mt-3">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="nome completo do cliente"  required>
-          </div>
-          <div class="form-group mt-3">
-            <label for="name">Plano</label>
-            <input type="text" class="form-control" name="plan" id="plan" placeholder="Selecione o plano" value="criar combobox" required>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message">errado</div>
-            <div class="sent-message">feitoo</div>
-          </div>
-          <div class="text-center"><button type="submit">Salvar</button></div>
-        </form>
+            <form action="save-new-customer.php" method="post" role="form" class="php-email-form">
+              <div class="form-group mt-3">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="nome completo do cliente" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="address">Endereço completo</label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="endereço completo do cliente" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" name="cpf" id="cpf" placeholder="CPF do cliente" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="phone">Telefone</label>
+                <input type="text" class="form-control" name="phone" id="phone" placeholder="telefone do cliente" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do cliente" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="seller">Nome vendedor</label>
+                <input type="text" class="form-control" name="seller" id="seller" placeholder="vendedor que efetuou a venda" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="plan">Plano</label>
+                <select name="plan" id="plan" class="form-control bg-dark text-white" required>
+                  <option value="">Selecione o plano</option>
+                  <?php
+                  // Consulta os planos
+                  $sql = "SELECT id_plano, nome_plano FROM tb_planos ORDER BY nome_plano";
+                  $resultado = mysqli_query($conn, $sql);
+
+                  while ($linha = mysqli_fetch_assoc($resultado)) {
+                    $idPlano = $linha['id_plano'];
+                    $nomePlano = $linha['nome_plano'];
+                    echo "<option value='$idPlano'>$nomePlano</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message">errado</div>
+                <div class="sent-message">feitoo</div>
+              </div>
+              <div class="text-center"><button type="submit">Salvar</button></div>
+            </form>
 
           </div><!-- End Contact Form -->
 
@@ -145,7 +186,7 @@ if( isset( $_SESSION['mensagem'] ) )
       </div>
     </section><!-- End Contact Section -->
 
-    
+
   </main><!-- End #main -->
 
   <footer id="footer" class="footer">
@@ -153,7 +194,7 @@ if( isset( $_SESSION['mensagem'] ) )
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 

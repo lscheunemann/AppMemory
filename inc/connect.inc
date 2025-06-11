@@ -102,6 +102,7 @@ function createtables($conn){
             nome_plano VARCHAR(50) NOT NULL UNIQUE,
             valor_plano DECIMAL( 30, 2 ) NOT NULL,
             duracao_mes_plano INT(2) NOT NULL,
+            quantidade_entes INT(3) NOT NULL,
             descricao_plano VARCHAR(200) NOT NULL
             );
     ";
