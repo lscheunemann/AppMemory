@@ -169,7 +169,7 @@ function createtables($conn){
             parceiro INT(6) NOT NULL,
             nome_cliente VARCHAR(100) NOT NULL,
             endereco_cliente VARCHAR(100) NOT NULL,
-            cpf_cliente INT(11) NOT NULL UNIQUE,
+            cpf_cliente VARCHAR(11) NOT NULL UNIQUE,
             telefone_cliente VARCHAR(100) NOT NULL,
             email_cliente VARCHAR(100) NOT NULL,
             plano_cliente INT(6) NOT NULL,

@@ -5,13 +5,13 @@
     <?php
     require("../inc/connect.inc");
     session_start();
-    if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true)) {
-        unset($_SESSION['login']);
-        unset($_SESSION['senha']);
+    if ((!isset($_SESSION['loginPartner']) == true) and (!isset($_SESSION['senhaPartner']) == true)) {
+        unset($_SESSION['loginPartner']);
+        unset($_SESSION['senhaPartner']);
         header("Location: ../index.php");
     }
 
-    $logado = $_SESSION['login'];
+    $logado = $_SESSION['loginPartner'];
 
     $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 
@@ -26,11 +26,13 @@
     //obtém os dados do clçiente do formulário preenchido
     $nome = $_POST['name'];
     $endereco = $_POST['address'];
-    $cpf = $_POST['cpf'];
+    $cpfTemp = $_POST['cpf'];
     $telefone = $_POST['phone'];
     $email = $_POST['email'];
     $nomeVendedor = $_POST['seller'];
     $plano = $_POST['plan'];
+
+    $cpf = preg_replace('/[^0-9]/', '', $cpfTemp);
 
 
     //verifica se já existe cliente existente
@@ -44,13 +46,13 @@
     } else {
         ///se não existe cria o novo cliente
         mysqli_query($conn, "insert into tb_clientes (parceiro, nome_cliente, status_cliente, endereco_cliente, cpf_cliente, telefone_cliente, email_cliente, plano_cliente, nome_vendedor) values ('$parceiro', '$nome', 1, '$endereco', '$cpf', '$telefone', '$email', '$plano', '$nomeVendedor')") or die("Não foi possível cadastrar o cliente!");
-    $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: customer-manager.php");
+        $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
+        header("Location: customer-manager.php");
     }
 
 
 
-    
+
     ?>
 </head>
 
