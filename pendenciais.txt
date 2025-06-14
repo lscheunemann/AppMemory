@@ -26,4 +26,6 @@
 
 -> criar pagina error-customer-exist.html
 
--> ajustar na save-new-customer.php para salvar o parceiro (sempore 0) e o cpf (converter numero) corretamente
+
+
+-> fazer pagina para salvar edição de cadastro de cliente

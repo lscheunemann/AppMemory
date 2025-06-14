@@ -36,16 +36,15 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<?php  
+<?php
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
-if((!isset ($_SESSION['loginPartner']) == true) and (!isset ($_SESSION['senhaPartner']) == true))
-{
-	unset($_SESSION['loginPartner']);
-	unset($_SESSION['senhaPartner']);
-	header("Location: ../index.php");
-	}
+if ((!isset($_SESSION['loginPartner']) == true) and (!isset($_SESSION['senhaPartner']) == true)) {
+  unset($_SESSION['loginPartner']);
+  unset($_SESSION['senhaPartner']);
+  header("Location: ../index.php");
+}
 
 $logado = $_SESSION['loginPartner'];
 
@@ -56,14 +55,15 @@ $sql = "Select nome_usuario_parceiro, parceiro from tb_usuarios_parceiro where e
 // setando as linhas de exibição na tela;
 $resultado = mysqli_query($conn, $sql);
 
-	
-while ($linha = mysqli_fetch_array($resultado)) {			
-  $nome 	  = $linha["nome_usuario_parceiro"];
+
+while ($linha = mysqli_fetch_array($resultado)) {
+  $nome     = $linha["nome_usuario_parceiro"];
   $parceiro = $linha["parceiro"];
 }
 
 
 ?>
+
 <body>
 
   <!-- ======= Header ======= -->
@@ -84,7 +84,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
         </ul>
       </nav><!-- .navbar -->
 
-     
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -103,48 +103,48 @@ while ($linha = mysqli_fetch_array($resultado)) {
         </div>
       </div>
     </div><!-- End Page Header -->
- 
+
 
     <div class="section-header">
-          <h2>Cadastro de clientes</h2> 
+      <h2>Cadastro de clientes</h2>
     </div>
     <div class="d-flex justify-content-center">
-    <a href="new-customer.php">
+      <a href="new-customer.php">
         <button class="btn btn-primary" type="button">Adicionar novo cliente</button>
-    </a>
+      </a>
     </div>
     <br>
     <h5 align="center">Clientes cadastrados</h5>
     <section class="container mt-4">
-                <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Plano</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Plano</th>
+              <th scope="col">Status</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
 
-    <?php
-        $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro'";
-        $resultadoCli = mysqli_query($conn, $sqlCli);
-        
-        while ($linhaCli = mysqli_fetch_array($resultadoCli)){
-            $idCli      = $linhaCli["id_cliente"];
-            $nomeCli    = $linhaCli["nome_cliente"];
-            $planoId   = $linhaCli["plano_cliente"];
-            $statusCli  = $linhaCli["status_cliente"];
+            <?php
+            $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro'";
+            $resultadoCli = mysqli_query($conn, $sqlCli);
 
-            $sqlPlano = "SELECT nome_plano FROM tb_planos WHERE id_plano = '$planoId'";
-            $resultadoPlano = mysqli_query($conn, $sqlPlano);
-            $linhaPlano = mysqli_fetch_assoc($resultadoPlano);
-            $plano = $linhaPlano['nome_plano'];
+            while ($linhaCli = mysqli_fetch_array($resultadoCli)) {
+              $idCli      = $linhaCli["id_cliente"];
+              $nomeCli    = $linhaCli["nome_cliente"];
+              $planoId   = $linhaCli["plano_cliente"];
+              $statusCli  = $linhaCli["status_cliente"];
+
+              $sqlPlano = "SELECT nome_plano FROM tb_planos WHERE id_plano = '$planoId'";
+              $resultadoPlano = mysqli_query($conn, $sqlPlano);
+              $linhaPlano = mysqli_fetch_assoc($resultadoPlano);
+              $plano = $linhaPlano['nome_plano'];
 
 
-            echo ("
+              echo ("
                 
                     
                     <tr>
@@ -152,7 +152,10 @@ while ($linha = mysqli_fetch_array($resultado)) {
                         <td>$plano</td>
                         <td>$statusCli</td>
                         <td>
-                        <button class='btn btn-primary btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#XXX.php'>Ver</button>
+                        <form action='customer-manager-edit.php' method='post' style='display: inline;'>
+                          <input type='hidden' name='id' value='$idCli'>
+                          <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
+                        </form>  
                         <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer'>Excluir</button>
                         </td>
                     </tr>
@@ -160,13 +163,13 @@ while ($linha = mysqli_fetch_array($resultado)) {
               
 
             ");
-         }
+            }
 
-        
-    ?>
-                </tbody>
-                </table>
-                </div>
+
+            ?>
+          </tbody>
+        </table>
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -176,7 +179,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 
@@ -196,23 +199,27 @@ while ($linha = mysqli_fetch_array($resultado)) {
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <!-- Modal excluir depoimento-->
-<div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="deleteCustomer" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteCustomer"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja excluir este depoimento?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
+  <div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="deleteCustomer" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteCustomer">
+            <font color="black">Atenção!</font>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <h6>
+            <font color="black">Tem certeza que deseja excluir este depoimento?</font>
+          </h6>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </body>
 
