@@ -151,16 +151,14 @@ if (isset($_SESSION['mensagem'])) {
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label for="dateBirth">Código</label>
+                  <label for="code">Código</label>
                   <input type="text" name="code" class="form-control" id="code" placeholder="código do cliente" value="<?php if (!empty($id_cliente)) {
                                                                                                                                             echo $id_cliente;
-                                                                                                                                          } ?>" disabled required>
-                                                    <input type="hidden" name="id" value="<?php if (!empty($id_cliente)) {
-                                                        echo $id_cliente;
-                                                      } ?>">
+                                                                                                                                          } ?>" readonly required>
+                                                    
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <label for="dateDeath">Status</label>
+                  <label for="status">Status</label>
                   <input type="text" class="form-control" name="status" id="status" placeholder="status" value="<?php if (!empty($statuscliente)) {
                                                                                                                                               echo $statuscliente;
                                                                                                                                             } ?>" disabled required>
@@ -168,13 +166,13 @@ if (isset($_SESSION['mensagem'])) {
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label for="cityBirth">CPF</label>
+                  <label for="cpf">CPF</label>
                   <input type="text" name="cpf" class="form-control" id="cpf" placeholder="cpf do cliente" value="<?php if (!empty($cpfcliente)) {
                                                                                                                                               echo $cpfcliente;
                                                                                                                                             } ?>" disabled required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <label for="cityDeath">Telefone</label>
+                  <label for="phone">Telefone</label>
                   <input type="text" class="form-control" name="phone" id="phone" placeholder="e-mail do cliente" value="<?php if (!empty($telefonecliente)) {
                                                                                                                                                 echo $telefonecliente;
                                                                                                                                               } ?>" required>
@@ -182,26 +180,26 @@ if (isset($_SESSION['mensagem'])) {
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <label for="nameMother">Plano</label>
+                  <label for="plan">Plano</label>
                   <input type="text" name="plan" class="form-control" id="plan" placeholder="plano" value="<?php if (!empty($planocliente)) {
                                                                                                                                         echo $planocliente;
                                                                                                                                       } ?>" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <label for="nameFather">Vendedor</label>
+                  <label for="seller">Vendedor</label>
                   <input type="text" class="form-control" name="seller" id="seller" placeholder="vendedor" value="<?php if (!empty($nomevendedor)) {
                                                                                                                                         echo $nomevendedor;
                                                                                                                                       } ?>" disabled required>
                 </div>
               </div>
               <div class="form-group mt-3">
-                <label for="location">E-mail</label>
+                <label for="email">E-mail</label>
                 <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do cliente" value="<?php if (!empty($emailcliente)) {
                                                                                                                                     echo $emailcliente;
                                                                                                                                   } ?>" disabled required>
               </div>
               <div class="form-group mt-3">
-                <label for="location">Endereço</label>
+                <label for="address">Endereço</label>
                 <input type="text" class="form-control" name="address" id="address" placeholder="e-mail do cliente" value="<?php if (!empty($enderecocliente)) {
                                                                                                                                     echo $enderecocliente;
                                                                                                                                   } ?>" required>
