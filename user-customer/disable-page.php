@@ -13,6 +13,9 @@
 
     $logado = $_SESSION['login'];
 
+    $id = $_GET['id'];
+
+
     $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 
     //busca o cliente e parceiro do ente
@@ -23,10 +26,9 @@
         $cliente = $linha["cliente"];
         $parceiro = $linha["parceiro"];
     }
-    
 
 
-    mysqli_query($conn, "update tb_configuracoes set ativo=0 where cliente='$cliente' and parceiro='$parceiro'");
+    mysqli_query($conn, "update tb_configuracoes set ativo=0 where cliente='$cliente' and parceiro='$parceiro' and ente='$id'");
 
 
 

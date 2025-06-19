@@ -297,7 +297,7 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
       </div>
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="disable-page.php"><button type="button" class="btn btn-success">Sim</button></a>
+        <a href="disable-page.php?id=<?php echo $idEnte; ?>"><button type="button" class="btn btn-success">Sim</button></a>
       </div>
     </div>
   </div>
@@ -315,7 +315,7 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
       </div>
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="enable-page.php"><button type="button" class="btn btn-success">Sim</button></a>
+        <a href="enable-page.php?id=<?php echo $idEnte; ?>"><button type="button" class="btn btn-success">Sim</button></a>
       </div>
     </div>
   </div>

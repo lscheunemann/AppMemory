@@ -145,22 +145,38 @@ if (isset($_POST['idEnte'])) {
 
             if ($aprovado == 0) {$aprovadoText = "Não";} else {$aprovadoText = "Sim";}
             
-            echo ("
-                
-                    
-                    <tr>
-                        <td>$autor</td>
-                        <td>$depoimento</td>
-                        <td>$aprovadoText</td>
-                        <td>
-                        <a href='approve-testimonials.php?id=$id_depoimento'><button class='btn btn-success btn-sm'>Aprovar</button></a>
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
-                        </td>
-                    </tr>
-                    
-              
+           echo ("
+                <tr>
+                  <td>$autor</td>
+                  <td>$depoimento</td>
+                  <td>$aprovadoText</td>
+                  <td>
+                    <a href='approve-testimonials.php?id=$id_depoimento'><button class='btn btn-success btn-sm'>Aprovar</button></a>
+                    <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteDepoimento$id_depoimento'>Excluir</button>
+                  </td>
+                </tr>
 
-            ");
+                <!-- Modal de exclusão individual -->
+                <div class='modal fade' id='deleteDepoimento$id_depoimento' tabindex='-1' aria-labelledby='deleteDepoimentoLabel$id_depoimento' aria-hidden='true'>
+                  <div class='modal-dialog modal-dialog-centered'>
+                    <div class='modal-content'>
+                      <div class='modal-header'>
+                        <h5 class='modal-title' id='deleteDepoimentoLabel$id_depoimento'>
+                          <font color='black'>Atenção!</font>
+                        </h5>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                      </div>
+                      <div class='modal-body text-center'>
+                        <h6><font color='black'>Tem certeza que deseja excluir este depoimento de <strong>$autor</strong>?</font></h6>
+                      </div>
+                      <div class='modal-footer justify-content-center'>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
+                        <a href='delete-testimonials.php?id=$id_depoimento'><button type='button' class='btn btn-success'>Sim</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ");
         }
 
         
@@ -205,25 +221,6 @@ if (isset($_POST['idEnte'])) {
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
-
-<!-- Modal excluir depoimento-->
-<div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteTestimonials"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja excluir este depoimento?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Modal ativar pagina (deixado aqui para referencia para ser usado quando implementar a modal de confirmação ao aprovar)-->
 <div class="modal fade" id="enableModal" tabindex="-1" aria-labelledby="enableModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

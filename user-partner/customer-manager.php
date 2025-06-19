@@ -172,8 +172,8 @@ while ($linha = mysqli_fetch_array($resultado)) {
                             <h6><font color='black'>Tem certeza que deseja excluir o cliente <strong>$nomeCli</strong>?</font></h6>
                           </div>
                           <div class='modal-footer justify-content-center'>
-                            <a href='delete-customer.php?id=$idCli' class='btn btn-success'>Sim</a>
                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
+                            <a href='delete-customer.php?id=$idCli' class='btn btn-success'>Sim</a>
                           </div>
                         </div>
                       </div>
