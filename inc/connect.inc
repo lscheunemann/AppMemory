@@ -189,7 +189,8 @@ function createtables($conn){
             email_usuario_cliente VARCHAR(100) NOT NULL UNIQUE,
             senha_usuario_cliente VARCHAR(100) NOT NULL,
             cliente INT(6) NOT NULL,
-            parceiro INT(6) NOT NULL
+            parceiro INT(6) NOT NULL,
+            ativo INT(6) NOT NULL
             );
     ";
     if (!mysqli_query($conn,$sql)) { 

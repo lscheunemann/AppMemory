@@ -35,7 +35,7 @@
     session_start();
 
     $_SESSION['mensagem'] = 'Depoimento aprovado com sucesso';
-    header("Location: page-testimonials.php");
+    header("Location: list-entes.php");
     ?>
 
 </head>

@@ -145,24 +145,40 @@ while ($linha = mysqli_fetch_array($resultado)) {
 
 
               echo ("
-                
-                    
                     <tr>
-                        <td>$nomeCli</td>
-                        <td>$plano</td>
-                        <td>$statusCli</td>
-                        <td>
+                      <td>$nomeCli</td>
+                      <td>$plano</td>
+                      <td>$statusCli</td>
+                      <td>
                         <form action='customer-manager-edit.php' method='post' style='display: inline;'>
                           <input type='hidden' name='id' value='$idCli'>
                           <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
                         </form>  
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer'>Excluir</button>
-                        </td>
+                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer$idCli'>Excluir</button>
+                      </td>
                     </tr>
-                    
-              
 
-            ");
+                    <!-- Modal exclusiva do cliente -->
+                    <div class='modal fade' id='deleteCustomer$idCli' tabindex='-1' aria-labelledby='deleteCustomerLabel$idCli' aria-hidden='true'>
+                      <div class='modal-dialog modal-dialog-centered'>
+                        <div class='modal-content'>
+                          <div class='modal-header'>
+                            <h5 class='modal-title' id='deleteCustomerLabel$idCli'>
+                              <font color='black'>Atenção!</font>
+                            </h5>
+                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                          </div>
+                          <div class='modal-body text-center'>
+                            <h6><font color='black'>Tem certeza que deseja excluir o cliente <strong>$nomeCli</strong>?</font></h6>
+                          </div>
+                          <div class='modal-footer justify-content-center'>
+                            <a href='delete-customer.php?id=$idCli' class='btn btn-success'>Sim</a>
+                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    ");
             }
 
 
@@ -198,28 +214,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <!-- Modal excluir depoimento-->
-  <div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="deleteCustomer" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteCustomer">
-            <font color="black">Atenção!</font>
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <h6>
-            <font color="black">Tem certeza que deseja excluir este depoimento?</font>
-          </h6>
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-          <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 </body>
 

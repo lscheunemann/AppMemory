@@ -15,7 +15,7 @@ $con = connect_db() or die("N�o � poss�vel conectar-se ao servidor.");
 
 
 // A vriavel $result pega as varias $login e $senha, faz uma pesquisa na tabela de usuarios de cliente
-$resultCustomer = mysqli_query($con,"SELECT * FROM tb_usuarios_cliente WHERE email_usuario_cliente = '$login_scape' AND senha_usuario_cliente= '$senha_scape'");
+$resultCustomer = mysqli_query($con,"SELECT * FROM tb_usuarios_cliente WHERE email_usuario_cliente = '$login_scape' AND senha_usuario_cliente= '$senha_scape' AND ativo=1");
 
 /* Logo abaixo temos um bloco com if e else, verificando se a vari�vel $result foi bem sucedida, ou seja se ela estiver encontrado algum registro id�ntico o seu valor ser� igual a 1, se n�o, se n�o tiver registros seu valor ser� 0. Dependendo do resultado ele redirecionar� para a pagina site.php ou retornara  para a pagina do formul�rio inicial para que se possa tentar novamente realizar o login */
 $totalCustomer = mysqli_num_rows($resultCustomer);
