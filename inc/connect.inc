@@ -174,7 +174,8 @@ function createtables($conn){
             email_cliente VARCHAR(100) NOT NULL,
             plano_cliente INT(6) NOT NULL,
             nome_vendedor VARCHAR(100) NOT NULL,
-            status_cliente VARCHAR(10) NOT NULL
+            status_cliente VARCHAR(10) NOT NULL,
+            deletado INT(6) NOT NULL
             );
     ";
     if (!mysqli_query($conn,$sql)) { 
