@@ -28,26 +28,27 @@
     //obtém os dados do cliente a ser deletado
     $id = $_GET['id'];
 
-    
+
     //verifica se possui entes com página ativa
     $sqlPageActive = "SELECT id_configuracao FROM tb_configuracoes WHERE cliente = '$id' AND ativo = 1 ";
     $resultadoPageActive = mysqli_query($conn, $sqlPageActive);
     while ($linhaPageActive = mysqli_fetch_array($resultadoPageActive)) {
         $id_config = $linhaPageActive["id_configuracao"];
     }
-    
-    if (isset($id_config) && $id_config > 0){
+
+    if (isset($id_config) && $id_config > 0) {
+        
         header("Location: error-delete_customer.html");
+    } else {
+        mysqli_query($conn, "update tb_clientes set deletado=1 where id_cliente='$id'") or die("Não foi possível deletar o cliente!");
+        header("Location: customer-deletado.html");
     }
-    else{
-        header("Location: deletado.html");
-    }
+
+
+    // criar regra para verificar plano ativo futuramente
 
 
 
-
-    
-    
     /*
     
     //deleta o depoimento na base de dados

@@ -129,7 +129,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
           <tbody>
 
             <?php
-            $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro'";
+            $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro' AND deletado = 0";
             $resultadoCli = mysqli_query($conn, $sqlCli);
 
             while ($linhaCli = mysqli_fetch_array($resultadoCli)) {
