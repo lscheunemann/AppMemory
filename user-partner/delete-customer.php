@@ -48,19 +48,6 @@
     // criar regra para verificar plano ativo futuramente
 
 
-
-    /*
-    
-    //deleta o depoimento na base de dados
-    $sqlApprove = "DELETE FROM tb_depoimentos_ente WHERE id_depoimento='$id'";
-    mysqli_query($conn, $sqlApprove);
-
-    session_start();
-
-    $_SESSION['mensagem'] = 'Depoimento excluído com sucesso';
-    header("Location: list-entes.php");
-
-    */
     ?>
 
 </head>
