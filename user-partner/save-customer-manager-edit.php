@@ -15,27 +15,20 @@
 
     $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 
-    //busca o parceiro em questão
-    $sql = "Select id_usuario_parceiro from tb_usuarios_parceiro where email_usuario_parceiro = '$logado'";
-    $resultado = mysqli_query($conn, $sql);
-    while ($linha = mysqli_fetch_array($resultado)) {
-        $parceiro = $linha["id_usuario_parceiro"];
-    }
-
-
-
-    //obtém os dados do clçiente do formulário preenchido
-    $codigo = $_POST['code'];
-    $nome = $_POST['name'];
+   
+    //obtém os dados do formulário preenchido
+    $id_parceiro = $_POST['id'];
+    $nome = $_POST['namePartner'];
+    $razaoSocial = $_POST['razaoSocial'];
     $telefone = $_POST['phone'];
     $endereco = $_POST['address'];
-    $plano = $_POST['plan'];
+    $responsavelfin = $_POST['responsible'];
 
 
-    ///altera cliente
-    mysqli_query($conn, "update tb_clientes set nome_cliente='$nome', endereco_cliente='$endereco', telefone_cliente='$telefone', plano_cliente='$plano' where id_cliente='$codigo'") or die("Não foi possível alterar o cliente!");
+    ///altera parceiro
+    mysqli_query($conn, "update tb_parceiros set nome_parceiro='$nome', razaosocial_parceiro='$razaoSocial', telefone_parceiro='$telefone', endereco_parceiro='$endereco', responsavelfinanceiro_parceiro='$responsavelfin' where id_parceiro='$id_parceiro'") or die("Não foi possível alterar o cliente!");
     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: customer-manager.php");
+    header("Location: home.php");
 
 
 

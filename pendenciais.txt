@@ -25,3 +25,5 @@
 -> precisa vincular quantidade de entes a plano contratado no cadastro do cliente no módulo de parceiro
 
 -> implementar deleção de ente
+
+-> implementar gestão de logotipo do parceiro

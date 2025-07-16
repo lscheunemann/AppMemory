@@ -73,7 +73,7 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
   $telefoneparceiro = $linha2["telefone_parceiro"];
   $emailparceiro = $linha2["email_parceiro"];
   $responsavelfin = $linha2["responsavelfinanceiro_parceiro"];
-  $responsavelcli = $linha2["responsavelcliente_parceiro"];
+  $endereco_parceiro = $linha2["endereco_parceiro"];
   $statusparceiro = $linha2["status_parceiro"];
 }
 
@@ -142,10 +142,12 @@ if (isset($_SESSION['mensagem'])) {
                 <input type="text" class="form-control" name="namePartner" id="namePartner" placeholder="nome do parceiro" value="<?php if (!empty($nomeparceiro)) {
                                                                                                                             echo $nomeparceiro;
                                                                                                                           } ?>" required>
-                
+                <input type="hidden" name="id" value="<?php if (!empty($id_parceiro)) {
+                                                        echo $id_parceiro;
+                                                      } ?>">
               </div>
               <div class="form-group mt-3">
-                <label for="name">Nome parceiro</label>
+                <label for="name">Razão social</label>
                 <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" placeholder="razão social" value="<?php if (!empty($razaosocial)) {
                                                                                                                             echo $razaosocial;
                                                                                                                           } ?>" required>
@@ -169,13 +171,13 @@ if (isset($_SESSION['mensagem'])) {
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="cpf">Inscrição municipal</label>
-                  <input type="text" name="im" class="form-control" id="im" placeholder="cpf do cliente" value="<?php if (!empty($inscricaomunicipal)) {
+                  <input type="text" name="im" class="form-control" id="im" placeholder="cpf do parceiro" value="<?php if (!empty($inscricaomunicipal)) {
                                                                                                                                               echo $inscricaomunicipal;
                                                                                                                                             } ?>" readonly required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="phone">Telefone</label>
-                  <input type="text" class="form-control" name="phone" id="phone" placeholder="e-mail do cliente" value="<?php if (!empty($telefoneparceiro)) {
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="e-mail do parceiro" value="<?php if (!empty($telefoneparceiro)) {
                                                                                                                                                 echo $telefoneparceiro;
                                                                                                                                               } ?>" required>
                 </div>
@@ -183,14 +185,20 @@ if (isset($_SESSION['mensagem'])) {
 
               <div class="form-group mt-3">
                 <label for="email">E-mail</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do cliente" value="<?php if (!empty($emailparceiro)) {
+                <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do parceiro" value="<?php if (!empty($emailparceiro)) {
                                                                                                                                     echo $emailparceiro;
                                                                                                                                   } ?>" readonly required>
               </div>
               <div class="form-group mt-3">
                 <label for="address">Endereço</label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="e-mail do cliente" value="<?php if (!empty($enderecocliente)) {
-                                                                                                                                    echo $enderecocliente;
+                <input type="text" class="form-control" name="address" id="address" placeholder="endereco do parceiro" value="<?php if (!empty($endereco_parceiro)) {
+                                                                                                                                    echo $endereco_parceiro;
+                                                                                                                                  } ?>" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="address">Responsável financeiro</label>
+                <input type="text" class="form-control" name="responsible" id="responsible" placeholder="responsável pelo parceiro" value="<?php if (!empty($responsavelfin)) {
+                                                                                                                                    echo $responsavelfin;
                                                                                                                                   } ?>" required>
               </div>
 

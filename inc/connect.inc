@@ -87,7 +87,7 @@ function createtables($conn){
             telefone_parceiro VARCHAR(100) NOT NULL,
             email_parceiro VARCHAR(100) NOT NULL,
             responsavelfinanceiro_parceiro VARCHAR(100) NOT NULL,
-            responsavelcliente_parceiro VARCHAR(100) NOT NULL,
+            endereco_parceiro VARCHAR(200) NOT NULL,
             status_parceiro VARCHAR(10) NOT NULL
             );
     ";
