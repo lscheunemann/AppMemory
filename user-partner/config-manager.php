@@ -140,8 +140,8 @@ if (isset($_SESSION['mensagem'])) {
               <div class="form-group mt-3">
                 <label for="name">Nome parceiro</label>
                 <input type="text" class="form-control" name="namePartner" id="namePartner" placeholder="nome do parceiro" value="<?php if (!empty($nomeparceiro)) {
-                                                                                                                            echo $nomeparceiro;
-                                                                                                                          } ?>" required>
+                                                                                                                                    echo $nomeparceiro;
+                                                                                                                                  } ?>" required>
                 <input type="hidden" name="id" value="<?php if (!empty($id_parceiro)) {
                                                         echo $id_parceiro;
                                                       } ?>">
@@ -149,57 +149,57 @@ if (isset($_SESSION['mensagem'])) {
               <div class="form-group mt-3">
                 <label for="name">Razão social</label>
                 <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" placeholder="razão social" value="<?php if (!empty($razaosocial)) {
-                                                                                                                            echo $razaosocial;
-                                                                                                                          } ?>" required>
-                
+                                                                                                                                echo $razaosocial;
+                                                                                                                              } ?>" required>
+
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="code">CNPJ</label>
                   <input type="text" name="cnpj" class="form-control" id="cnpj" placeholder="cnpj" value="<?php if (!empty($cnpjparceiro)) {
-                                                                                                                                            echo $cnpjparceiro;
-                                                                                                                                          } ?>" readonly required>
-                                                    
+                                                                                                            echo $cnpjparceiro;
+                                                                                                          } ?>" readonly required>
+
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="status">Inscrição estadual</label>
                   <input type="text" class="form-control" name="ie" id="ie" placeholder="status" value="<?php if (!empty($inscricaoestadual)) {
-                                                                                                                                              echo $inscricaoestadual;
-                                                                                                                                            } ?>" readonly required>
+                                                                                                          echo $inscricaoestadual;
+                                                                                                        } ?>" readonly required>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="cpf">Inscrição municipal</label>
                   <input type="text" name="im" class="form-control" id="im" placeholder="cpf do parceiro" value="<?php if (!empty($inscricaomunicipal)) {
-                                                                                                                                              echo $inscricaomunicipal;
-                                                                                                                                            } ?>" readonly required>
+                                                                                                                    echo $inscricaomunicipal;
+                                                                                                                  } ?>" readonly required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="phone">Telefone</label>
                   <input type="text" class="form-control" name="phone" id="phone" placeholder="e-mail do parceiro" value="<?php if (!empty($telefoneparceiro)) {
-                                                                                                                                                echo $telefoneparceiro;
-                                                                                                                                              } ?>" required>
+                                                                                                                            echo $telefoneparceiro;
+                                                                                                                          } ?>" required>
                 </div>
               </div>
 
               <div class="form-group mt-3">
                 <label for="email">E-mail</label>
                 <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do parceiro" value="<?php if (!empty($emailparceiro)) {
-                                                                                                                                    echo $emailparceiro;
-                                                                                                                                  } ?>" readonly required>
+                                                                                                                          echo $emailparceiro;
+                                                                                                                        } ?>" readonly required>
               </div>
               <div class="form-group mt-3">
                 <label for="address">Endereço</label>
                 <input type="text" class="form-control" name="address" id="address" placeholder="endereco do parceiro" value="<?php if (!empty($endereco_parceiro)) {
-                                                                                                                                    echo $endereco_parceiro;
-                                                                                                                                  } ?>" required>
+                                                                                                                                echo $endereco_parceiro;
+                                                                                                                              } ?>" required>
               </div>
               <div class="form-group mt-3">
                 <label for="address">Responsável financeiro</label>
                 <input type="text" class="form-control" name="responsible" id="responsible" placeholder="responsável pelo parceiro" value="<?php if (!empty($responsavelfin)) {
-                                                                                                                                    echo $responsavelfin;
-                                                                                                                                  } ?>" required>
+                                                                                                                                              echo $responsavelfin;
+                                                                                                                                            } ?>" required>
               </div>
 
               <div class="my-3">
@@ -220,7 +220,100 @@ if (isset($_SESSION['mensagem'])) {
 
       </div>
     </section><!-- End Contact Section -->
- 
+    <br><br><br><br>
+    <section id="contact" class="contact">
+      <div class="container"></div>
+      <div class="row gy-4 justify-content-center">
+        <div class="section-header">
+          <h2>Logotipo</h2>
+        </div>
+        <div class="col-lg-3">
+          <div class="info-item d-flex">
+            <i class="bi bi-geo-alt flex-shrink-0"></i>
+            <div>
+              <h4>Editar logotipo</h4>
+              <form action="upload-logo-image.php" method="post" enctype="multipart/form-data">
+                <div class="d-flex align-items-center gap-2">
+                  <input type='hidden' name="idPartner" value="<?php echo $id_parceiro ?>">
+                  <label for="logoPhoto" id="fileLabel" class="btn btn-success mb-0">Escolher foto</label>
+                  <input type="file" id="logoPhoto" name="logoPhoto" accept=".png, .jpg, .jpeg" class="custom-file-input" hidden />
+                  <button type="submit" class="btn btn-primary">Salvar imagem</button>
+                </div>
+              </form>
+
+              <script>
+                // Seleciona os elementos
+                const fileInput = document.getElementById('logoPhoto');
+                const fileLabel = document.getElementById('fileLabel');
+
+                // Adiciona um evento para detectar quando um arquivo for selecionado
+                fileInput.addEventListener('change', () => {
+                  if (fileInput.files.length > 0) {
+                    // Adiciona a classe "btn-success" para deixar o botão verde
+                    fileLabel.classList.remove('btn-success');
+                    fileLabel.classList.add('btn-primary');
+                  } else {
+                    // Retorna ao estado original caso nenhum arquivo esteja selecionado
+                    fileLabel.classList.remove('btn-primary');
+                    fileLabel.classList.add('btn-success');
+                  }
+                });
+              </script>
+
+            </div>
+          </div>
+        </div>
+        <!-- End Info Item -->
+      </div>
+    </section>
+
+
+    <section id="gallery" class="gallery">
+      <div class="container-fluid">
+
+
+        <?php
+        $repositorioUsuario = "../assets/img/gallery/logo-partner/$id_parceiro/";
+
+        // Busca todos os arquivos de imagem no diretório do usuário
+        $filesLogo = glob($repositorioUsuario . '*.{png,jpg,jpeg}', GLOB_BRACE);
+
+        // Verifica se há arquivos na pasta
+        if (!empty($filesLogo)) {
+          // Ordena os arquivos pelo tempo de modificação (mais recente primeiro)
+          usort($filesLogo, function ($a, $b) {
+            return filemtime($b) - filemtime($a); // Ordena do mais recente para o mais antigo
+          });
+
+          // Pega o arquivo mais recente
+          $mediaLogo = $filesLogo[0];
+          $nameFile = basename($mediaLogo);
+          $pathFile = $repositorioUsuario . $nameFile;
+        } else {
+          // Caminho padrão caso nenhum arquivo seja encontrado
+          $mediaLogo = '../assets/img/gallery/icon/empty.png';
+          $pathFile = "../assets/img/gallery/icon/empty.png";
+        }
+        ?>
+
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="gallery-item h-100">
+              <img src="<?php echo $mediaLogo; ?>" class="img-fluid" alt="">
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="<?php echo $pathFile; ?>" title="Foto de perfil" class="glightbox preview-link"><i
+                    class="bi bi-arrows-angle-expand"></i></a>
+
+              </div>
+            </div>
+          </div><!-- End Gallery Item -->
+
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
   </main><!-- End #main -->
 
   <footer id="footer" class="footer">
