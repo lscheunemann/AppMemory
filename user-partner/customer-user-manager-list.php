@@ -36,16 +36,14 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
-<?php  
+<?php
 require("../inc/connect.inc");
 // esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
-if((!isset ($_SESSION['loginPartner']) == true) and (!isset ($_SESSION['senhaPartner']) == true))
-{
-	unset($_SESSION['loginpartner']);
-	unset($_SESSION['senhapartner']);
-	header("Location: ../index.php");
+if ((!isset($_SESSION['loginPartner']) == true) and (!isset($_SESSION['senhaPartner']) == true)) {
+  unset($_SESSION['loginPartner']);
+  unset($_SESSION['senhaPartner']);
+  header("Location: ../index.php");
 }
 
 $logado = $_SESSION['loginPartner'];
@@ -53,14 +51,16 @@ $logado = $_SESSION['loginPartner'];
 
 $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 
-$sql = "Select nome_usuario_parceiro from tb_usuarios_parceiro where email_usuario_parceiro = '$logado'";
+$sql = "Select nome_usuario_parceiro, parceiro from tb_usuarios_parceiro where email_usuario_parceiro = '$logado'";
 // setando as linhas de exibição na tela;
 $resultado = mysqli_query($conn, $sql);
 
-	
-while ($linha = mysqli_fetch_array($resultado)) {			
-  $nome 	= $linha["nome_usuario_parceiro"];
+
+while ($linha = mysqli_fetch_array($resultado)) {
+  $nome     = $linha["nome_usuario_parceiro"];
+  $parceiro = $linha["parceiro"];
 }
+
 
 ?>
 
@@ -84,6 +84,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
         </ul>
       </nav><!-- .navbar -->
 
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -97,71 +98,104 @@ while ($linha = mysqli_fetch_array($resultado)) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Dashboard</h2>
-           <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
-
-            <a class="cta-btn" href="contact.html">Available for hire</a>
-           -->
+            <h2>Gerenciar clientes</h2>
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <div class="container">
 
-        <div class="row gy-4">
+    <div class="section-header">
+      <h2>Cadastro de clientes</h2>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a href="new-customer.php">
+        <button class="btn btn-primary" type="button">Adicionar novo cliente</button>
+      </a>
+    </div>
+    <br>
+    <h5 align="center">Clientes cadastrados</h5>
+    <section class="container mt-4">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Plano</th>
+              <th scope="col">Status</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
 
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-strava"></i>
-              <h4><a href="page-manager.php" class="stretched-link">Gerenciar perfis</a></h4>
-              <p>Crie, edite ou elimine perfis de usuários</p>
-            </div>
-          </div><!-- End Service Item -->
-          
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-vimeo"></i>
-              <h4><a href="customer-manager.php" class="stretched-link">Gerenciar clientes</a></h4>
-              <p>Crie, edite ou elimine seus clientes</p>
-            </div>
-          </div><!-- End Service Item -->
+            <?php
+            $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro' AND deletado = 0";
+            $resultadoCli = mysqli_query($conn, $sqlCli);
 
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-bounding-box-circles"></i>
-              <h4><a href="config-manager.php" class="stretched-link">Gerenciar parceiro</a></h4>
-              <p>Edite informações cadastrais, altere logotipo, solicite desativação</p>
-            </div>
-          </div><!-- End Service Item -->
+            while ($linhaCli = mysqli_fetch_array($resultadoCli)) {
+              $idCli      = $linhaCli["id_cliente"];
+              $nomeCli    = $linhaCli["nome_cliente"];
+              $planoId   = $linhaCli["plano_cliente"];
+              $statusCli  = $linhaCli["status_cliente"];
 
-          <div class="col-xl-3 col-md-6 d-flex">
-            <div class="service-item position-relative">
-              <i class="bi bi-calendar4-week"></i>
-              <h4><a href="customer-user-manager.php" class="stretched-link">Gerenciar usuários de clientes</a></h4>
-              <p>Crie, edite ou elimine usuários</p>
-            </div>
-          </div><!-- End Service Item -->
+              $sqlPlano = "SELECT nome_plano FROM tb_planos WHERE id_plano = '$planoId'";
+              $resultadoPlano = mysqli_query($conn, $sqlPlano);
+              $linhaPlano = mysqli_fetch_assoc($resultadoPlano);
+              $plano = $linhaPlano['nome_plano'];
 
-          
 
-        </div>
+              echo ("
+                    <tr>
+                      <td>$nomeCli</td>
+                      <td>$plano</td>
+                      <td>$statusCli</td>
+                      <td>
+                        <form action='customer-manager-edit.php' method='post' style='display: inline;'>
+                          <input type='hidden' name='id' value='$idCli'>
+                          <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
+                        </form>  
+                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer$idCli'>Excluir</button>
+                      </td>
+                    </tr>
 
+                    <!-- Modal exclusiva do cliente -->
+                    <div class='modal fade' id='deleteCustomer$idCli' tabindex='-1' aria-labelledby='deleteCustomerLabel$idCli' aria-hidden='true'>
+                      <div class='modal-dialog modal-dialog-centered'>
+                        <div class='modal-content'>
+                          <div class='modal-header'>
+                            <h5 class='modal-title' id='deleteCustomerLabel$idCli'>
+                              <font color='black'>Atenção!</font>
+                            </h5>
+                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                          </div>
+                          <div class='modal-body text-center'>
+                            <h6><font color='black'>Tem certeza que deseja excluir o cliente <strong>$nomeCli</strong>?</font></h6>
+                          </div>
+                          <div class='modal-footer justify-content-center'>
+                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
+                            <a href='delete-customer.php?id=$idCli' class='btn btn-success'>Sim</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    ");
+            }
+
+
+            ?>
+          </tbody>
+        </table>
       </div>
-    </section><!-- End Services Section -->
-
+    </section>
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-      
+
     </div>
   </footer><!-- End Footer -->
 
@@ -176,10 +210,11 @@ while ($linha = mysqli_fetch_array($resultado)) {
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <!-- <script src="../assets/vendor/php-email-form/validate.js"></script>-->
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+
 
 </body>
 
