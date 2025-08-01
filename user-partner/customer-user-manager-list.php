@@ -61,6 +61,21 @@ while ($linha = mysqli_fetch_array($resultado)) {
   $parceiro = $linha["parceiro"];
 }
 
+if (isset($_POST['id'])) {
+  $id = $_POST['id'];
+  echo "ID recebido: " . $id;
+} else {
+  echo "Nenhum ID recebido via POST.";
+}
+
+$sql2 = "Select nome_cliente from tb_clientes where id_cliente = '$id'";
+// setando as linhas de exibição na tela;
+$resultado2 = mysqli_query($conn, $sql2);
+
+
+while ($linha2 = mysqli_fetch_array($resultado2)) {
+  $nomeCliente     = $linha2["nome_cliente"];
+}
 
 ?>
 
@@ -98,7 +113,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Gerenciar clientes</h2>
+            <h2>Gerenciar usuários de cliente</h2>
           </div>
         </div>
       </div>
@@ -106,22 +121,22 @@ while ($linha = mysqli_fetch_array($resultado)) {
 
 
     <div class="section-header">
-      <h2>Cadastro de clientes</h2>
+      <h2>Usuários de <?php echo $nomeCliente ?></h2>
     </div>
     <div class="d-flex justify-content-center">
       <a href="new-customer.php">
-        <button class="btn btn-primary" type="button">Adicionar novo cliente</button>
+        <button class="btn btn-primary" type="button">Adicionar novo usuário</button>
       </a>
     </div>
     <br>
-    <h5 align="center">Clientes cadastrados</h5>
+    <h5 align="center">Usuários cadastrados</h5>
     <section class="container mt-4">
       <div class="table-responsive">
         <table class="table table-bordered text-center">
           <thead class="table-dark">
             <tr>
               <th scope="col">Nome</th>
-              <th scope="col">Plano</th>
+              <th scope="col">E-mail</th>
               <th scope="col">Status</th>
               <th scope="col">Ações</th>
             </tr>
@@ -129,51 +144,52 @@ while ($linha = mysqli_fetch_array($resultado)) {
           <tbody>
 
             <?php
-            $sqlCli = "SELECT * FROM tb_clientes WHERE parceiro = '$parceiro' AND deletado = 0";
-            $resultadoCli = mysqli_query($conn, $sqlCli);
+            $sqlUserCli = "SELECT * FROM tb_usuarios_cliente WHERE cliente = '$id'";
+            $resultadoUserCli = mysqli_query($conn, $sqlUserCli);
 
-            while ($linhaCli = mysqli_fetch_array($resultadoCli)) {
-              $idCli      = $linhaCli["id_cliente"];
-              $nomeCli    = $linhaCli["nome_cliente"];
-              $planoId   = $linhaCli["plano_cliente"];
-              $statusCli  = $linhaCli["status_cliente"];
+            while ($linhaUserCli = mysqli_fetch_array($resultadoUserCli)) {
+              $idUserCli      = $linhaUserCli["id_usuario_cliente"];
+              $nomeUserCli    = $linhaUserCli["nome_usuario_cliente"];
+              $emailUserCli   = $linhaUserCli["email_usuario_cliente"];
+              $statusUserCliTEMP  = $linhaUserCli["ativo"];
 
-              $sqlPlano = "SELECT nome_plano FROM tb_planos WHERE id_plano = '$planoId'";
-              $resultadoPlano = mysqli_query($conn, $sqlPlano);
-              $linhaPlano = mysqli_fetch_assoc($resultadoPlano);
-              $plano = $linhaPlano['nome_plano'];
+              if ($statusUserCliTEMP == 1){
+                $statusUserCli = "Ativo";
+              }else{
+                $statusUserCli = "Inativo";
+              }
 
 
               echo ("
                     <tr>
-                      <td>$nomeCli</td>
-                      <td>$plano</td>
-                      <td>$statusCli</td>
+                      <td>$nomeUserCli</td>
+                      <td>$emailUserCli</td>
+                      <td>$statusUserCli</td>
                       <td>
                         <form action='customer-manager-edit.php' method='post' style='display: inline;'>
-                          <input type='hidden' name='id' value='$idCli'>
+                          <input type='hidden' name='id' value='$idUserCli'>
                           <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
                         </form>  
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer$idCli'>Excluir</button>
+                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer$idUserCli'>Excluir</button>
                       </td>
                     </tr>
 
                     <!-- Modal exclusiva do cliente -->
-                    <div class='modal fade' id='deleteCustomer$idCli' tabindex='-1' aria-labelledby='deleteCustomerLabel$idCli' aria-hidden='true'>
+                    <div class='modal fade' id='deleteCustomer$idUserCli' tabindex='-1' aria-labelledby='deleteCustomerLabel$idUserCli' aria-hidden='true'>
                       <div class='modal-dialog modal-dialog-centered'>
                         <div class='modal-content'>
                           <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteCustomerLabel$idCli'>
+                            <h5 class='modal-title' id='deleteCustomerLabel$idUserCli'>
                               <font color='black'>Atenção!</font>
                             </h5>
                             <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                           </div>
                           <div class='modal-body text-center'>
-                            <h6><font color='black'>Tem certeza que deseja excluir o cliente <strong>$nomeCli</strong>?</font></h6>
+                            <h6><font color='black'>Tem certeza que deseja excluir o cliente <strong>$nomeUserCli</strong>?</font></h6>
                           </div>
                           <div class='modal-footer justify-content-center'>
                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
-                            <a href='delete-customer.php?id=$idCli' class='btn btn-success'>Sim</a>
+                            <a href='delete-customer.php?id=$idUserCli' class='btn btn-success'>Sim</a>
                           </div>
                         </div>
                       </div>
