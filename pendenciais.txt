@@ -26,4 +26,4 @@
 
 -> implementar deleção de ente
 
--> implementar gestão de logotipo do parceiro
+-> (FEITO) implementar gestão de logotipo do parceiro
