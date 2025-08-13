@@ -27,3 +27,5 @@
 -> implementar deleção de ente
 
 -> (FEITO) implementar gestão de logotipo do parceiro
+
+-> implementar ATIVAR/DESATIVAR usuário de cliente pelo modulo de parceiro

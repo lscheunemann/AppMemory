@@ -124,8 +124,8 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
       <h2>Usuários de <?php echo $nomeCliente ?></h2>
     </div>
     <div class="d-flex justify-content-center">
-      <a href="new-customer.php">
-        <button class="btn btn-primary" type="button">Adicionar novo usuário</button>
+      <a href="new-user.php">
+        <button class="btn btn-primary" type="button">Adicionar novo usuário - FAZER"</button>
       </a>
     </div>
     <br>
