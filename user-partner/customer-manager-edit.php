@@ -126,13 +126,13 @@ if (isset($_SESSION['mensagem'])) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Gerenciar cliente</h2>
+            <h2>em construção</h2>
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
     <div class="section-header">
-      <h2>Informações do usuário do cliente</h2>
+      <h2>Informações do cliente</h2>
     </div>
 
     <section id="pageManager" class="contact">
@@ -182,7 +182,7 @@ if (isset($_SESSION['mensagem'])) {
                 <div class="sent-message">feitoo</div>
               </div>
               <div class="text-center d-flex justify-content-center gap-2">
-                <a href="customer-user-manager.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
+                <a href="customer-manager.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
                 <?php if ($statususuario==1){
                   echo "<button class='btn btn-danger mx-2' type='button' data-bs-toggle='modal' data-bs-target='#disableModal'>Desativar usuário</button>";
                 }

@@ -28,4 +28,13 @@
 
 -> (FEITO) implementar gestão de logotipo do parceiro
 
--> implementar ATIVAR/DESATIVAR usuário de cliente pelo modulo de parceiro
+-> (FEITO) implementar ATIVAR/DESATIVAR usuário de cliente pelo modulo de parceiro
+    -> implementar verificação de ativo/inativo ao logar com usuário de cliente
+
+-> criar usuário de cliente com email de cadastro de cliente
+
+-> implementar recuperação de senhas para todos os tipos de usuários
+
+-> cirar páginas de sucesso para todos os cadastros existentes
+
+-> fazer customer-manager-edit

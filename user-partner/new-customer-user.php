@@ -54,30 +54,23 @@ $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 $sql = "Select nome_usuario_parceiro, parceiro from tb_usuarios_parceiro where email_usuario_parceiro = '$logado'";
 // setando as linhas de exibição na tela;
 $resultado = mysqli_query($conn, $sql);
-
-
 while ($linha = mysqli_fetch_array($resultado)) {
   $nome     = $linha["nome_usuario_parceiro"];
   $parceiro = $linha["parceiro"];
 }
 
-if (isset($_POST['id'])) {
-  $id = $_POST['id'];
-  echo "ID recebido: " . $id;
+if (isset($_GET['id'])) {
+    $id = $_GET['id']; 
+    echo "O ID recebido foi: " . $id;
 } else {
-  echo "Nenhum ID recebido via POST.";
+    echo "Nenhum ID recebido.";
 }
 
-$sql2 = "Select nome_cliente from tb_clientes where id_cliente = '$id'";
-// setando as linhas de exibição na tela;
-$resultado2 = mysqli_query($conn, $sql2);
 
-
-while ($linha2 = mysqli_fetch_array($resultado2)) {
-  $nomeCliente     = $linha2["nome_cliente"];
-}
 
 ?>
+
+
 
 <body>
 
@@ -113,96 +106,66 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Gerenciar usuários de cliente</h2>
+            <h2>Gerenciar cliente</h2>
           </div>
         </div>
       </div>
     </div><!-- End Page Header -->
-
-
     <div class="section-header">
-      <h2>Usuários de <?php echo $nomeCliente ?></h2>
+      <h2>Cadastrar usuário do cliente</h2>
     </div>
-    <div class="d-flex justify-content-center">
-      <a href="new-customer-user.php?id=<?php echo $id; ?>">
-        <button class="btn btn-primary" type="button">Adicionar novo usuário</button>
-      </a>
-    </div>
-    <br>
-    <h5 align="center">Usuários cadastrados</h5>
-    <section class="container mt-4">
-      <div class="table-responsive">
-        <table class="table table-bordered text-center">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">E-mail</th>
-              <th scope="col">Status</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
 
-            <?php
-            $sqlUserCli = "SELECT * FROM tb_usuarios_cliente WHERE cliente = '$id'";
-            $resultadoUserCli = mysqli_query($conn, $sqlUserCli);
-
-            while ($linhaUserCli = mysqli_fetch_array($resultadoUserCli)) {
-              $idUserCli      = $linhaUserCli["id_usuario_cliente"];
-              $nomeUserCli    = $linhaUserCli["nome_usuario_cliente"];
-              $emailUserCli   = $linhaUserCli["email_usuario_cliente"];
-              $statusUserCliTEMP  = $linhaUserCli["ativo"];
-
-              if ($statusUserCliTEMP == 1){
-                $statusUserCli = "Ativo";
-              }else{
-                $statusUserCli = "Inativo";
-              }
+    <section id="pageManager" class="contact">
+      <div class="container">
 
 
-              echo ("
-                    <tr>
-                      <td>$nomeUserCli</td>
-                      <td>$emailUserCli</td>
-                      <td>$statusUserCli</td>
-                      <td>
-                        <form action='customer-manager-edit.php' method='post' style='display: inline;'>
-                          <input type='hidden' name='id' value='$idUserCli'>
-                          <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
-                        </form>  
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteCustomer$idUserCli'>Excluir</button>
-                      </td>
-                    </tr>
 
-                    <!-- Modal exclusiva do cliente -->
-                    <div class='modal fade' id='deleteCustomer$idUserCli' tabindex='-1' aria-labelledby='deleteCustomerLabel$idUserCli' aria-hidden='true'>
-                      <div class='modal-dialog modal-dialog-centered'>
-                        <div class='modal-content'>
-                          <div class='modal-header'>
-                            <h5 class='modal-title' id='deleteCustomerLabel$idUserCli'>
-                              <font color='black'>Atenção!</font>
-                            </h5>
-                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                          </div>
-                          <div class='modal-body text-center'>
-                            <h6><font color='black'>Tem certeza que deseja excluir o cliente <strong>$nomeUserCli</strong>?</font></h6>
-                          </div>
-                          <div class='modal-footer justify-content-center'>
-                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
-                            <a href='delete-user-customer.php?id=$idUserCli' class='btn btn-success'>Sim</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    ");
-            }
+        <div class="row justify-content-center mt-4">
+
+          <div class="col-lg-9">
+            <form action="save-new-customer-user.php" method="post" role="form" class="php-email-form">
+              <div class="form-group mt-3">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="nome do cliente">
+
+              <div class="form-group mt-3">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do cliente">
+              </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="code">Senha</label>
+                  <input type="password" name="password" class="form-control" id="password" placeholder="senha">
+
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="status">Confirme a senha</label>
+                  <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" placeholder="senha">
+                  <input type="hidden" name="id" value="<?php echo($id); ?>">
+                </div>
+              </div>
 
 
-            ?>
-          </tbody>
-        </table>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message">errado</div>
+                <div class="sent-message">feitoo</div>
+              </div>
+              <div class="text-center d-flex justify-content-center gap-2">
+                <a href="customer-user-manager.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
+                <button type="submit">Salvar</button>
+              </div>
+
+            </form>
+
+          </div><!-- End Contact Form -->
+
+        </div>
+
       </div>
-    </section>
+    </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
 
