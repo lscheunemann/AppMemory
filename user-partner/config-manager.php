@@ -136,7 +136,7 @@ if (isset($_SESSION['mensagem'])) {
         <div class="row justify-content-center mt-4">
 
           <div class="col-lg-9">
-            <form action="save-customer-manager-edit.php" method="post" role="form" class="php-email-form">
+            <form action="save-partner-manager-edit.php" method="post" role="form" class="php-email-form">
               <div class="form-group mt-3">
                 <label for="name">Nome parceiro</label>
                 <input type="text" class="form-control" name="namePartner" id="namePartner" placeholder="nome do parceiro" value="<?php if (!empty($nomeparceiro)) {

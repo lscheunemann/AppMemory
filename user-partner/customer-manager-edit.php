@@ -67,20 +67,25 @@ if (isset($_POST['id'])) {
 }
 
 
-// busca dados do usuário de cliente
-$sql2 = "Select * from tb_usuarios_cliente where id_usuario_cliente = '$id'";
-$resultado2 = mysqli_query($conn, $sql2);
-while ($linha2 = mysqli_fetch_array($resultado2)) {
-  $id_usuario = $linha2["id_usuario_cliente"];
-  $nomeusuario = $linha2["nome_usuario_cliente"];
-  $statususuario = $linha2["ativo"];
-  $emailusuario = $linha2["email_usuario_cliente"];
+// busca dados do  cliente
+$sqlCli = "Select * from tb_clientes where id_cliente = '$id'";
+$resultadoCli = mysqli_query($conn, $sqlCli);
+while ($linhaCli = mysqli_fetch_array($resultadoCli)) {
+  $id_cliente = $linhaCli["id_cliente"];
+  $nomecliente = $linhaCli["nome_cliente"];
+  $statuscliente = $linhaCli["status_cliente"];
+  $enderecocliente = $linhaCli["endereco_cliente"];
+  $cpfcliente = $linhaCli["cpf_cliente"];
+  $telefonecliente = $linhaCli["telefone_cliente"];
+  $emailcliente = $linhaCli["email_cliente"];
+  $planocliente = $linhaCli["plano_cliente"];
+  $vendedorcliente = $linhaCli["nome_vendedor"];
 }
 
-if ($statususuario == 1) {
-  $statususuarioText = "Ativo";
+if ($statuscliente == 1) {
+  $statusclienteText = "Ativo";
 } else {
-  $statususuarioText = "Inativo";
+  $statusclienteText = "Inativo";
 }
 
 
@@ -126,7 +131,7 @@ if (isset($_SESSION['mensagem'])) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>em construção</h2>
+            <h2>Gerenciar cliente</h2>
           </div>
         </div>
       </div>
@@ -146,33 +151,69 @@ if (isset($_SESSION['mensagem'])) {
             <form action="save-customer-manager-edit.php" method="post" role="form" class="php-email-form">
               <div class="form-group mt-3">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="nome do cliente" value="<?php if (!empty($nomeusuario)) {
-                                                                                                                      echo $nomeusuario;
-                                                                                                                    } ?>" readonly required>
+                <input type="text" class="form-control" name="name" id="name" placeholder="nome do cliente" value="<?php if (!empty($nomecliente)) {
+                                                                                                                      echo $nomecliente;
+                                                                                                                    } ?>" required>
 
               </div>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <label for="code">Código</label>
-                  <input type="text" name="code" class="form-control" id="code" placeholder="código do cliente" value="<?php if (!empty($id_usuario)) {
-                                                                                                                          echo $id_usuario;
+                  <input type="text" name="code" class="form-control" id="code" placeholder="código do cliente" value="<?php if (!empty($id_cliente)) {
+                                                                                                                          echo $id_cliente;
                                                                                                                         } ?>" readonly required>
 
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
                   <label for="status">Status</label>
-                  <input type="text" class="form-control" name="status" id="status" placeholder="status" value="<?php if (!empty($statususuarioText)) {
-                                                                                                                  echo $statususuarioText;
+                  <input type="text" class="form-control" name="status" id="status" placeholder="status" value="<?php if (!empty($statusclienteText)) {
+                                                                                                                  echo $statusclienteText;
                                                                                                                 } ?>" disabled required>
                 </div>
               </div>
 
+              <div class="form-group mt-3">
+                <label for="email">Endereço</label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="endereço do cliente" value="<?php if (!empty($enderecocliente)) {
+                                                                                                                          echo $enderecocliente;
+                                                                                                                        } ?>" required>
+              </div>
 
               <div class="form-group mt-3">
                 <label for="email">E-mail</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do cliente" value="<?php if (!empty($emailusuario)) {
-                                                                                                                          echo $emailusuario;
-                                                                                                                        } ?>" disabled required>
+                <input type="text" class="form-control" name="email" id="email" placeholder="e-mail do cliente" value="<?php if (!empty($emailcliente)) {
+                                                                                                                          echo $emailcliente;
+                                                                                                                        } ?>" readonly required>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="code">CPF</label>
+                  <input type="text" name="cpf" class="form-control" id="cpf" placeholder="cpf do cliente" value="<?php if (!empty($cpfcliente)) {
+                                                                                                                          echo $cpfcliente;
+                                                                                                                        } ?>" readonly required>
+
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="status">Telefone</label>
+                  <input type="text" class="form-control" name="telephone" id="telephone" placeholder="telefone" value="<?php if (!empty($telefonecliente)) {
+                                                                                                                  echo $telefonecliente;
+                                                                                                                } ?>" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <label for="code">Plano</label>
+                  <input type="text" name="plan" class="form-control" id="plan" placeholder="plano do cliente" value="<?php if (!empty($planocliente)) {
+                                                                                                                          echo $planocliente;
+                                                                                                                        } ?>" readonly required>
+
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <label for="status">Nome vendedor</label>
+                  <input type="text" class="form-control" name="seller" id="seller" placeholder="vendedor" value="<?php if (!empty($vendedorcliente)) {
+                                                                                                                  echo $vendedorcliente;
+                                                                                                                } ?>" readonly required>
+                </div>
               </div>
 
 
@@ -183,12 +224,7 @@ if (isset($_SESSION['mensagem'])) {
               </div>
               <div class="text-center d-flex justify-content-center gap-2">
                 <a href="customer-manager.php" class="btn btn-primary btn-sm d-inline-flex align-items-center">Voltar</a>
-                <?php if ($statususuario==1){
-                  echo "<button class='btn btn-danger mx-2' type='button' data-bs-toggle='modal' data-bs-target='#disableModal'>Desativar usuário</button>";
-                }
-                 else{
-                  echo "<button class='btn btn-success btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#enableModal'>Ativar usuário</button>";
-                }; ?> 
+                <button type="submit" class="btn btn-success btn-sm">Salvar</button>
               </div>
 
             </form>
@@ -226,44 +262,8 @@ if (isset($_SESSION['mensagem'])) {
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <!-- Modal excluir depoimento-->
 
-  <!-- Modal desativar usuario-->
-<div class="modal fade" id="disableModal" tabindex="-1" aria-labelledby="disableModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="disableModalLabel"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja desativar o usuário?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="disable-user.php?id=<?php echo $id_usuario; ?>"><button type="button" class="btn btn-success">Sim</button></a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal ativar usuario-->
-<div class="modal fade" id="enableModal" tabindex="-1" aria-labelledby="enableModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="enableModalLabel"><font color="black">Atenção!</font></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center">
-        <h6><font color="black">Tem certeza que deseja ativar o usuário?</font></h6>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-        <a href="enable-user.php?id=<?php echo $id_usuario; ?>"><button type="button" class="btn btn-success">Sim</button></a>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 </body>

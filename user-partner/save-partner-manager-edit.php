@@ -17,15 +17,18 @@
 
    
     //obtém os dados do formulário preenchido
-    $idcliente = $_POST['code'];
-    $nomecliente = $_POST['name'];
-    $enderecocliente = $_POST['address'];
-    $telefonecliente = $_POST['telephone'];
-    
-    ///altera cliente
-    mysqli_query($conn, "update tb_clientes set nome_cliente='$nomecliente', endereco_cliente='$enderecocliente', telefone_cliente='$telefonecliente' where id_cliente='$idcliente'") or die("Não foi possível alterar o cliente!");
+    $id_parceiro = $_POST['id'];
+    $nome = $_POST['namePartner'];
+    $razaoSocial = $_POST['razaoSocial'];
+    $telefone = $_POST['phone'];
+    $endereco = $_POST['address'];
+    $responsavelfin = $_POST['responsible'];
+
+
+    ///altera parceiro
+    mysqli_query($conn, "update tb_parceiros set nome_parceiro='$nome', razaosocial_parceiro='$razaoSocial', telefone_parceiro='$telefone', endereco_parceiro='$endereco', responsavelfinanceiro_parceiro='$responsavelfin' where id_parceiro='$id_parceiro'") or die("Não foi possível alterar o cliente!");
     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-    header("Location: customer-manager.php");
+    header("Location: home.php");
 
 
 
