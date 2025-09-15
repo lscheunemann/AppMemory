@@ -37,4 +37,4 @@
 
 -> cirar páginas de sucesso para todos os cadastros existentes
 
--> fazer customer-manager-edit
+-> (FEITO )fazer customer-manager-edit
