@@ -147,7 +147,7 @@ if (isset($_SESSION['mensagem'])) {
                           <input type='hidden' name='id' value='$cod_ente'>
                           <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
                         </form>
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteTestimonials'>Excluir</button>
+                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteEnte'>Excluir</button>
                         </td>
                     </tr>
                     
@@ -199,19 +199,19 @@ if (isset($_SESSION['mensagem'])) {
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <!-- Modal excluir depoimento-->
-  <div class="modal fade" id="deleteTestimonials" tabindex="-1" aria-labelledby="deleteTestimonials" aria-hidden="true">
+  <!-- Modal excluir ente-->
+  <div class="modal fade" id="deleteEnte" tabindex="-1" aria-labelledby="deleteEnte" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteTestimonials">
+          <h5 class="modal-title" id="deleteEnte">
             <font color="black">Atenção!</font>
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
           <h6>
-            <font color="black">Tem certeza que deseja excluir este depoimento?</font>
+            <font color="black">Tem certeza que deseja excluir este Ente ##em construção##?</font>
           </h6>
         </div>
         <div class="modal-footer justify-content-center">

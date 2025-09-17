@@ -117,7 +117,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
             <div class="service-item position-relative">
               <i class="bi bi-strava"></i>
               <h4><a href="page-manager.php" class="stretched-link">Gerenciar perfis</a></h4>
-              <p>Crie, edite ou elimine perfis de usuários</p>
+              <p>Crie, edite ou elimine perfis de usuários ##em construção##</p>
             </div>
           </div><!-- End Service Item -->
           

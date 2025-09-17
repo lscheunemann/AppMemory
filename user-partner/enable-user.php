@@ -27,7 +27,7 @@
 
     session_start();
 
-    header("Location: home.php");
+    header("Location: customer-user-manager.php");
     ?>
 </head>
 

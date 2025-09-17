@@ -141,7 +141,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
             <div class="service-item position-relative">
               <i class="bi bi-calendar4-week"></i>
               <h4><a href="account-manager.php" class="stretched-link">Gerenciar conta</a></h4>
-              <p>Plano, pagamentos, excluir conta</p>
+              <p>Plano, pagamentos, excluir conta ##em construção##</p>
             </div>
           </div><!-- End Service Item -->
 

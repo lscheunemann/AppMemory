@@ -62,7 +62,7 @@
                     //cria novo usuario
                     mysqli_query($conn, "insert into tb_usuarios_cliente (nome_usuario_cliente,email_usuario_cliente,senha_usuario_cliente,cliente,parceiro,ativo) values ('$nome', '$email', '$senha1', '$idCliente', '$parceiro', 0)") or die("Não foi possível cadastrar o usuário do cliente!");
                     $_SESSION['mensagem'] = 'Alterações realizadas com sucesso';
-                    header("Location: user-customer-create");
+                    header("Location: user-customer-create.html");
                 }
             }
         }
