@@ -1,6 +1,6 @@
 -> implementar algoritmo de criptografia para senhas;
 
--> ############quando criar um ente novo deve criar por default uma configuração zerada para o cliente e criar automaticamente o link do qrcode;
+-> ############ quando criar um ente novo deve criar por default uma configuração zerada para o cliente e criar automaticamente o link do qrcode;
 
 -> (FEITO) criar função de excluir fotos
 
@@ -38,3 +38,10 @@
 -> cirar páginas de sucesso para todos os cadastros existentes
 
 -> (FEITO )fazer customer-manager-edit
+
+
+
+testar:
+-> textos (erros de digitação, termos padrão, etc.);
+-> padrões de ícones e cores;
+-> mobile;

@@ -16,7 +16,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,17 +30,9 @@
   <!-- Template Main CSS File -->
   <link href="../assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: PhotoFolio
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 <?php
 require("../inc/connect.inc");
-// esse bloco de código em php verifica se existe a sessão, pois o usuário pode simplesmente não fazer o login e digitar na barra de endereço do seu navegador o caminho para a página principal do site (sistema), burlando assim a obrigação de fazer um login, com isso se ele não estiver feito o login não será criado a session, então ao verificar que a session não existe a página redireciona o mesmo para a index.php.
 session_start();
 if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true)) {
   unset($_SESSION['login']);
@@ -48,26 +42,20 @@ if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true
 
 $logado = $_SESSION['login'];
 
-
 $conn = connect_db() or die("Não é possível conectar-se ao servidor.");
 
 $sql = "Select nome_usuario_cliente, cliente, parceiro from tb_usuarios_cliente where email_usuario_cliente = '$logado'";
-
 $resultado = mysqli_query($conn, $sql);
 
-
 while ($linha = mysqli_fetch_array($resultado)) {
-  $nome   = $linha["nome_usuario_cliente"];
-  $cliente   = $linha["cliente"];
-  $parceiro   = $linha["parceiro"];
+  $nome     = $linha["nome_usuario_cliente"];
+  $cliente  = $linha["cliente"];
+  $parceiro = $linha["parceiro"];
 }
-
-
 
 if (isset($_SESSION['mensagem'])) {
   $mensagem = $_SESSION['mensagem'];
 }
-
 ?>
 
 <body>
@@ -76,9 +64,7 @@ if (isset($_SESSION['mensagem'])) {
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid d-flex align-items-center justify-content-between">
 
-      <a href="home.php" class="logo d-flex align-items-center  me-auto me-lg-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+      <a href="home.php" class="logo d-flex align-items-center me-auto me-lg-0">
         <i class="bi bi-camera"></i>
         <h1>Loves Memory</h1>
       </a>
@@ -88,8 +74,7 @@ if (isset($_SESSION['mensagem'])) {
           <li><a>Olá, <?php echo $nome ?></a></li>
           <li><a href="logout.php">Sair</a></li>
         </ul>
-      </nav><!-- .navbar -->
-
+      </nav>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
@@ -99,7 +84,6 @@ if (isset($_SESSION['mensagem'])) {
 
   <main id="main" data-aos="fade" data-aos-delay="1500">
 
-    <!-- ======= End Page Header ======= -->
     <div class="page-header d-flex align-items-center">
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
@@ -108,8 +92,7 @@ if (isset($_SESSION['mensagem'])) {
           </div>
         </div>
       </div>
-    </div><!-- End Page Header -->
-
+    </div>
 
     <div class="section-header">
       <h2>Entes</h2>
@@ -127,7 +110,6 @@ if (isset($_SESSION['mensagem'])) {
           <tbody>
 
             <?php
-            // busca dados do ente
             $sql2 = "Select * from tb_entes where cliente = '$cliente'";
             $resultado2 = mysqli_query($conn, $sql2);
 
@@ -136,33 +118,45 @@ if (isset($_SESSION['mensagem'])) {
                 $cod_ente = $linha2["id_ente"];
                 $nomeente = $linha2["nome_ente"];
 
-
                 echo ("
-                
-                    
-                    <tr>
-                        <td>$nomeente</td>
-                        <td>
-                        <form action='page-manager.php' method='post' style='display: inline;'>
-                          <input type='hidden' name='id' value='$cod_ente'>
-                          <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
-                        </form>
-                        <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteEnte'>Excluir</button>
-                        </td>
-                    </tr>
-                    
-              
+                  <tr>
+                    <td>$nomeente</td>
+                    <td>
+                      <form action='page-manager.php' method='post' style='display: inline;'>
+                        <input type='hidden' name='id' value='$cod_ente'>
+                        <button type='submit' class='btn btn-primary btn-sm'>Gerenciar</button>
+                      </form>
+                      <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteEnte$cod_ente'>Excluir</button>
+                    </td>
+                  </tr>
 
-            ");
+                  <!-- Modal excluir ente -->
+                  <div class='modal fade' id='deleteEnte$cod_ente' tabindex='-1' aria-labelledby='deleteEnte$cod_ente' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                      <div class='modal-content'>
+                        <div class='modal-header'>
+                          <h5 class='modal-title'><font color='black'>Atenção!</font></h5>
+                          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
+                        <div class='modal-body text-center'>
+                          <h6><font color='black'>Tem certeza que deseja excluir o Ente <b>$nomeente</b>? Todas as informações, incluindo mídias e depoimentos serão excluídas permanentemente!</font></h6>
+                        </div>
+                        <div class='modal-footer justify-content-center'>
+                          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
+                          <a href='delete-ente.php?id=$cod_ente'><button type='button' class='btn btn-success'>Sim</button></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ");
               }
             } else {
               echo "
                 <tr>
-                    <td colspan='2' class='text-center'>Nenhum ente cadastrado.</td>
+                  <td colspan='2' class='text-center'>Nenhum ente cadastrado.</td>
                 </tr>
               ";
             }
-
             ?>
           </tbody>
         </table>
@@ -170,58 +164,30 @@ if (isset($_SESSION['mensagem'])) {
       <div class="text-center mt-3">
         <a href="page-manager.php" class="btn btn-primary">Adicionar Ente</a>
       </div>
-
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
   <footer id="footer" class="footer">
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>Loves Memory</span></strong>. All Rights Reserved
       </div>
-
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <div id="preloader">
-    <div class="line"></div>
-  </div>
+  <div id="preloader"><div class="line"></div></div>
 
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
-  <!-- <script src="../assets/vendor/php-email-form/validate.js"></script>-->
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
-  <!-- Modal excluir ente-->
-  <div class="modal fade" id="deleteEnte" tabindex="-1" aria-labelledby="deleteEnte" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteEnte">
-            <font color="black">Atenção!</font>
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <h6>
-            <font color="black">Tem certeza que deseja excluir este Ente ##em construção##?</font>
-          </h6>
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-          <a href="delete-testimonials.php?id=<?php echo $id_depoimento; ?>"><button type="button" class="btn btn-success">Sim</button></a>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </body>
-
 </html>
