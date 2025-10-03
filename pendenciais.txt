@@ -1,6 +1,6 @@
 -> implementar algoritmo de criptografia para senhas;
 
--> ############ quando criar um ente novo deve criar por default uma configuração zerada para o cliente e criar automaticamente o link do qrcode;
+-> (FEITO) quando criar um ente novo deve criar por default uma configuração zerada para o cliente e criar automaticamente o link do qrcode;
 
 -> (FEITO) criar função de excluir fotos
 
@@ -24,7 +24,7 @@
 
 -> precisa vincular quantidade de entes a plano contratado no cadastro do cliente no módulo de parceiro
 
--> implementar deleção de ente
+-> (FEITO, mas falta excluir mídias)implementar deleção de ente
 
 -> (FEITO) implementar gestão de logotipo do parceiro
 
@@ -38,6 +38,7 @@
 -> cirar páginas de sucesso para todos os cadastros existentes
 
 -> (FEITO )fazer customer-manager-edit
+
 
 
 
