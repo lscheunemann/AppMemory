@@ -260,6 +260,7 @@ if (isset($_SESSION['mensagem'])) {
           <thead class="table-dark">
             <tr>
               <th scope="col">Autor</th>
+              <th scope="col">Parentesco</th>
               <th scope="col">Depoimento</th>
               <th scope="col">Ações</th>
             </tr>
@@ -274,6 +275,7 @@ if (isset($_SESSION['mensagem'])) {
               if (mysqli_num_rows($resultado2) > 0) {
               while ($linha2 = mysqli_fetch_array($resultado2)) {
                 $autor      = $linha2["escreveu"];
+                $parentesco      = $linha2["parentesco"];
                 $depoimento = $linha2["depoimento"];
                 $id_depoimento   = $linha2["id_depoimento"];
 
@@ -281,6 +283,7 @@ if (isset($_SESSION['mensagem'])) {
                 echo ("
                       <tr>
                         <td>$autor</td>
+                        <td>$parentesco</td>
                         <td>$depoimento</td>
                         <td>
                           <button class='btn btn-danger btn-sm' type='button' data-bs-toggle='modal' data-bs-target='#deleteDepoimento$id_depoimento'>Excluir</button>

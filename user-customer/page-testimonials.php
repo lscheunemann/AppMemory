@@ -125,6 +125,7 @@ if (isset($_POST['idEnte'])) {
                     <thead class="table-dark">
                     <tr>
                         <th scope="col">Autor</th>
+                        <th scope="col">Parentesco</th>
                         <th scope="col">Depoimento</th>
                         <th scope="col">Aprovado</th>
                         <th scope="col">Ações</th>
@@ -138,6 +139,7 @@ if (isset($_POST['idEnte'])) {
         
         while ($linha2 = mysqli_fetch_array($resultado2)){
             $autor      = $linha2["escreveu"];
+            $parentesco      = $linha2["parentesco"];
             $depoimento = $linha2["depoimento"];
             $aprovado   = $linha2["aprovado"];
             $aprovadoText = "null";
@@ -148,6 +150,7 @@ if (isset($_POST['idEnte'])) {
            echo ("
                 <tr>
                   <td>$autor</td>
+                  <td>$parentesco</td>
                   <td>$depoimento</td>
                   <td>$aprovadoText</td>
                   <td>

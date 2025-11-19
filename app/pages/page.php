@@ -31,9 +31,9 @@
 
 <?php
 $owner = "lucas.scheunemann@gmail.com";
-$id = 2;
+$idEnte = 2;
 
-$repoPhotoProfile = "../../assets/img/gallery/profile/$owner/$id/";
+$repoPhotoProfile = "../../assets/img/gallery/profile/$owner/$idEnte/";
 
 // Busca todos os arquivos de imagem no diretório do usuário
 $filesProfile = glob($repoPhotoProfile . '*.{png,jpg,jpeg}', GLOB_BRACE);
@@ -264,7 +264,7 @@ if (!empty($filesProfile)) {
         <div class="row gy-4 justify-content-center">
           <?php
           // Diretório da galeria
-          $diretorio = "../../assets/img/gallery/users/$owner/$id";
+          $diretorio = "../../assets/img/gallery/users/$owner/$idEnte";
 
           // Padrão de arquivos permitidos (imagens)
           $arquivos = glob($diretorio . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);

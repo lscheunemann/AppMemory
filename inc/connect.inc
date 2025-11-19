@@ -277,6 +277,7 @@ function createtables($conn){
             ente INT(6) NOT NULL,
             depoimento VARCHAR(1000) NOT NULL,
             escreveu VARCHAR (100) NOT NULL,
+            parentesco VARCHAR (100) NOT NULL,
             aprovado INT(1) NOT NULL
             );
     ";
