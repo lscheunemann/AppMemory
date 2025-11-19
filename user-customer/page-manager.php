@@ -86,6 +86,7 @@ while ($linha2 = mysqli_fetch_array($resultado2)) {
   $localizacao = $linha2["localizacao_ente"];
   $confissao = $linha2["confissao_ente"];
   $epitafio = $linha2["epitafio"];
+  $biografia = $linha2["biografia"];
 }
 
 if (isset($_SESSION['mensagem'])) {
@@ -221,6 +222,12 @@ if (isset($_SESSION['mensagem'])) {
                 <label for="epitaph">Epitáfio</label>
                 <textarea class="form-control" name="epitaph" id="epitaph" maxlength="1000" rows="5" placeholder="digite o epitáfio" required><?php if (!empty($epitafio)) {
                                                                                                                                                 echo $epitafio;
+                                                                                                                                              } ?></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <label for="biography">Biografia</label>
+                <textarea class="form-control" name="biography" id="biography" maxlength="10000" rows="10" placeholder="digite a biografia" required><?php if (!empty($biografia)) {
+                                                                                                                                                echo $biografia;
                                                                                                                                               } ?></textarea>
               </div>
               <div class="my-3">

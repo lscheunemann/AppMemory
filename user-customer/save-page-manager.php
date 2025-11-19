@@ -38,22 +38,23 @@
     $religiao = $_POST['religion'];
     $local_tumulo = $_POST['location'];
     $epitafio = $_POST['epitaph'];
+    $biografia = $_POST['biography'];
 
 
     //verifica se é um cadastro de um ente novo ou atualização de um existente
     if (isset($id) && $id > 0) {
-        mysqli_query($conn, "update tb_entes set nome_ente='$nome', dt_nascimento_ente='$dt_nascimento', dt_falecimento_ente='$dt_falecimento', cidade_nascimento_ente='$cidade_nascimento', cidade_falecimento_ente='$cidade_falecimento', nome_pai_ente='$nome_pai', nome_mae_ente='$nome_mae', casado_com='$casado_com', confissao_ente='$religiao', localizacao_ente='$local_tumulo', epitafio='$epitafio' where id_ente='$id'");
+        mysqli_query($conn, "update tb_entes set nome_ente='$nome', dt_nascimento_ente='$dt_nascimento', dt_falecimento_ente='$dt_falecimento', cidade_nascimento_ente='$cidade_nascimento', cidade_falecimento_ente='$cidade_falecimento', nome_pai_ente='$nome_pai', nome_mae_ente='$nome_mae', casado_com='$casado_com', confissao_ente='$religiao', localizacao_ente='$local_tumulo', epitafio='$epitafio', biografia='$biografia' where id_ente='$id'");
     } else {
         ///se não existe cria um novo ente
         // Primeiro insert
         mysqli_query($conn, "INSERT INTO tb_entes (
             cliente, parceiro, nome_ente, dt_nascimento_ente, dt_falecimento_ente,
             cidade_nascimento_ente, cidade_falecimento_ente, nome_pai_ente, nome_mae_ente,
-            casado_com, confissao_ente, localizacao_ente, epitafio
+            casado_com, confissao_ente, localizacao_ente, epitafio, biografia
         ) VALUES (
             '$cliente', '$parceiro', '$nome', '$dt_nascimento', '$dt_falecimento',
             '$cidade_nascimento', '$cidade_falecimento', '$nome_pai', '$nome_mae',
-            '$casado_com', '$religiao', '$local_tumulo', '$epitafio'
+            '$casado_com', '$religiao', '$local_tumulo', '$epitafio', '$biografia'
         )") or die("Não foi possível cadastrar ente!");
 
         // Recupera o ID gerado

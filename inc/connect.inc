@@ -214,7 +214,8 @@ function createtables($conn){
             casado_com VARCHAR(100),
             confissao_ente VARCHAR(50),
             localizacao_ente VARCHAR(200) NOT NULL,
-            epitafio VARCHAR(1000) NOT NULL
+            epitafio VARCHAR(1000) NOT NULL,
+            biografia VARCHAR(10000) NOT NULL
             );
     ";
     if (!mysqli_query($conn,$sql)) { 
