@@ -30,10 +30,20 @@
 </head>
 
 <?php
-$owner = "lucas.scheunemann@gmail.com";
+// variáveis para popular página
+$donoPagina = "lucas.scheunemann@gmail.com";
 $idEnte = 2;
+$nomeEnte = "";
+$epitafio = "";
+$dtNascimento = "";
+$dtFalecimento = "";
+$nomeMae = "";
+$nomePai = "";
+$conjuge = "";
+$confissao = "";
+$biografia = "";
 
-$repoPhotoProfile = "../../assets/img/gallery/profile/$owner/$idEnte/";
+$repoPhotoProfile = "../../assets/img/gallery/profile/$donoPagina/$idEnte/";
 
 // Busca todos os arquivos de imagem no diretório do usuário
 $filesProfile = glob($repoPhotoProfile . '*.{png,jpg,jpeg}', GLOB_BRACE);
@@ -264,7 +274,7 @@ if (!empty($filesProfile)) {
         <div class="row gy-4 justify-content-center">
           <?php
           // Diretório da galeria
-          $diretorio = "../../assets/img/gallery/users/$owner/$idEnte";
+          $diretorio = "../../assets/img/gallery/users/$donoPagina/$idEnte";
 
           // Padrão de arquivos permitidos (imagens)
           $arquivos = glob($diretorio . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
