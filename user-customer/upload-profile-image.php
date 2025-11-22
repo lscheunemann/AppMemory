@@ -34,11 +34,9 @@
     // Diretório base onde as imagens serão salvas
     $repositorioBase = "../assets/img/gallery/profile/";
 
-    // Nome da subpasta específica do usuário logado
-    $subpastaUsuario = $logado;
-
+  
     // Diretório onde o arquivo será salvo
-    $repositorio = $repositorioBase . $subpastaUsuario . "/" . $idEnte . "/";
+    $repositorio = $repositorioBase . "/" . $idEnte . "/";
 
     // Verifica se o diretório existe, cria se necessário
     if (!is_dir($repositorio)) {

@@ -52,10 +52,7 @@ while ($linha = mysqli_fetch_array($resultado)) {
 }
 
 
-$donoPagina = "lucas.scheunemann@gmail.com";
-
-
-$repoPhotoProfile = "../../assets/img/gallery/profile/$donoPagina/$idEnte/";
+$repoPhotoProfile = "../../assets/img/gallery/profile/$idEnte/";
 
 // Busca todos os arquivos de imagem no diretório do usuário
 $filesProfile = glob($repoPhotoProfile . '*.{png,jpg,jpeg}', GLOB_BRACE);

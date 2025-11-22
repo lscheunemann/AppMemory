@@ -192,7 +192,7 @@ if (isset($_POST['id'])) {
         </div>
 
         <?php
-        $repositorioUsuario = "../assets/img/gallery/profile/$logado/$idEnte/";
+        $repositorioUsuario = "../assets/img/gallery/profile/$idEnte/";
 
         // Busca todos os arquivos de imagem no diretório do usuário
         $filesProfile = glob($repositorioUsuario . '*.{png,jpg,jpeg}', GLOB_BRACE);
@@ -287,7 +287,7 @@ if (isset($_POST['id'])) {
         <div class="row gy-4 justify-content-center">
           <?php
           // Diretório da galeria
-          $diretorio = "../assets/img/gallery/users/$logado/$idEnte";
+          $diretorio = "../assets/img/gallery/users/$idEnte";
 
           // Padrão de arquivos permitidos (imagens)
           $arquivos = glob($diretorio . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);

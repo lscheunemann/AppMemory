@@ -17,7 +17,7 @@ if ((!isset($_SESSION['login']) == true) and (!isset($_SESSION['senha']) == true
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['imageName'])) {
     $logado = $_SESSION['login']; // Obtém o usuário logado
-    $diretorio = "../assets/img/gallery/users/$logado/$idEnte/"; // Caminho da pasta do usuário
+    $diretorio = "../assets/img/gallery/users/$idEnte/"; // Caminho da pasta do usuário
     $imagem = basename($_POST['imageName']); // Sanitiza o nome do arquivo
     $caminhoCompleto = $diretorio . $imagem; // Caminho do arquivo
 

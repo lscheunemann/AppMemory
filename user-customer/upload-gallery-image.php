@@ -33,10 +33,8 @@
 
     $repositorioBase = "../assets/img/gallery/users/";
 
-    $subpastaUsuario = $logado;
-
     // Diretório onde o arquivo será salvo
-    $repositorio = $repositorioBase . $subpastaUsuario . "/" . $idEnte . "/";
+    $repositorio = $repositorioBase . "/" . $idEnte . "/";
 
     // Verifica se o diretório existe, cria se necessário
     if (!is_dir($repositorio)) {
