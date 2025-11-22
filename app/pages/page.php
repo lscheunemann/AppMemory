@@ -30,18 +30,30 @@
 </head>
 
 <?php
-// variáveis para popular página
+$id = $_GET['id'];
+$idEnte = $id;
+
+require("../../inc/connect.inc");
+
+$conn = connect_db() or die("Não é possível conectar-se ao servidor.");
+
+$sql = "Select * from tb_entes where id_ente = '$id'";
+$resultado = mysqli_query($conn, $sql);	
+while ($linha = mysqli_fetch_array($resultado)) {			
+  $nomeEnte 	= $linha["nome_ente"];
+  $epitafio 	= $linha["epitafio"];
+  $dtNascimento 	= $linha["dt_nascimento_ente"];
+  $dtFalecimento 	= $linha["dt_falecimento_ente"];
+  $nomeMae 	= $linha["nome_mae_ente"];
+  $nomePai 	= $linha["nome_pai_ente"];
+  $conjuge 	= $linha["casado_com"];
+  $confissao 	= $linha["confissao_ente"];
+  $biografia 	= $linha["biografia"];
+}
+
+
 $donoPagina = "lucas.scheunemann@gmail.com";
-$idEnte = 2;
-$nomeEnte = "";
-$epitafio = "";
-$dtNascimento = "";
-$dtFalecimento = "";
-$nomeMae = "";
-$nomePai = "";
-$conjuge = "";
-$confissao = "";
-$biografia = "";
+
 
 $repoPhotoProfile = "../../assets/img/gallery/profile/$donoPagina/$idEnte/";
 
@@ -124,7 +136,7 @@ if (!empty($filesProfile)) {
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>Fulano de Tal</h2>
+            <h2><?php echo($nomeEnte) ?></h2>
             <p>Lorem ipsum dolor sit amet. Aut quam velit qui veniam porro nam voluptas commodi. Sit unde vero eos quia officia id praesentium eaque et voluptas quaerat est sint enim At ratione iste.</p>
 
             <!--        <a class="cta-btn" href="contact.html">Available for hire</a>-->
