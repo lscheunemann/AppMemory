@@ -134,7 +134,7 @@ if (!empty($filesProfile)) {
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
             <h2><?php echo($nomeEnte) ?></h2>
-            <p>Lorem ipsum dolor sit amet. Aut quam velit qui veniam porro nam voluptas commodi. Sit unde vero eos quia officia id praesentium eaque et voluptas quaerat est sint enim At ratione iste.</p>
+            <p><?php echo nl2br($epitafio) ?></p>
 
             <!--        <a class="cta-btn" href="contact.html">Available for hire</a>-->
 
@@ -156,24 +156,19 @@ if (!empty($filesProfile)) {
             <div class="row">
               <div class="col-lg-10">
                 <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Data de nascimento:</strong> <span>01/01/2001</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Data de falecimento:</strong> <span>01/01/2010</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Nome da mãe:</strong> <span>Fulana de Tal</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Nome do pai:</strong> <span>Fulano de Tal</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Casado com:</strong> <span>Ciclana de Tal</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Confissão religiosa:</strong> <span>Católico</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Data de nascimento:</strong> <span><?php echo($dtNascimento) ?></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Data de falecimento:</strong> <span><?php echo($dtFalecimento) ?></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Nome da mãe:</strong> <span><?php echo($nomeMae) ?></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Nome do pai:</strong> <span><?php echo($nomePai) ?></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Casado com:</strong> <span><?php echo($conjuge) ?></span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Confissão religiosa:</strong> <span><?php echo($confissao) ?></span></li>
                 </ul>
               </div>
             </div>
             <br>
             <h2>Biografia</h2>
             <p class="py-3">
-              Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
-              Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus itaque neque. Aliquid amet quidem ut quaerat cupiditate. Ab et eum qui repellendus omnis culpa magni laudantium dolores.
-            </p>
-            <p class="m-0">
-              Recusandae est praesentium consequatur eos voluptatem. Vitae dolores aliquam itaque odio nihil. Neque ut neque ut quae voluptas. Maxime corporis aut ut ipsum consequatur. Repudiandae sunt sequi minus qui et. Doloribus molestiae officiis.
-              Soluta eligendi fugiat omnis enim. Numquam alias sint possimus eveniet ad. Ratione in earum eum magni totam.
+              <?php echo nl2br($biografia) ?>
             </p>
           </div>
         </div>
@@ -283,7 +278,7 @@ if (!empty($filesProfile)) {
         <div class="row gy-4 justify-content-center">
           <?php
           // Diretório da galeria
-          $diretorio = "../../assets/img/gallery/users/$donoPagina/$idEnte";
+          $diretorio = "../../assets/img/gallery/users/$idEnte";
 
           // Padrão de arquivos permitidos (imagens)
           $arquivos = glob($diretorio . "/*.{jpg,jpeg,png,gif}", GLOB_BRACE);

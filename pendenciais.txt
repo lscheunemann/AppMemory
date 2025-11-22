@@ -39,6 +39,7 @@
 
 -> (FEITO )fazer customer-manager-edit
 
+-> criar "página não encontrada" no app e "pagina desativada"
 
 
 
